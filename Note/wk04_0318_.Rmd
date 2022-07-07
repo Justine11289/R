@@ -1,0 +1,614 @@
+---
+title: "wk04_0318_"
+author: "Justine"
+date: "2021/3/18"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes 
+---   
+
+#  [Home](Home.html)
+# inclass   
+```{r}
+x <- NA
+is.na(x)
+```
+<center>置中</center>   
+
+## ch04 向量物件運算    
+### 4-1 數值型的向量物件
+c()
+a:b
+seq(from, to, by)
+numeric() vs logical( ); character( )
+```{r}
+vec01 <- c(1, 5, 3, 7, 9)
+vec02 <- 1:100
+vec03 <- seq(100, 1000, 200)
+vec4a <- numeric(3)
+cat(vec01,vec02)  
+print(vec01)
+print(vec01,vec02)
+```
+
+```{r}
+vec05 <- c(1, 5, 3, "abc", "xyz") 
+```
+### 4-2 常見向量物件的數學運算函數  
+```{r}
+sum(vec01)
+max(vec01)
+min(vec01)
+mean(vec01)
+cumsum(vec01)
+cumprod(vec01)
+cummax(vec01)
+cummin(vec01)
+```
+### 4-3 向量運算考量 Inf -Inf NA    
+### 4-4 字串資料屬性
+```{r}
+nchar(vec05)
+length(vec05)
+nchar(vec01)
+length(vec01)
+```
+### 4-5 探索物件屬性
+is. integer, numeric, double, character
+```{r}
+class(islands)
+str(islands)
+```
+### 4-6 向量物件元素的存取    
+```{r}
+x <- 5
+x <- x * 10
+
+vec01[3] <- 500
+vec01
+```
+### 4-7 邏輯向量        
+  運算式    |                    說明  
+------------|-----------------------------------------
+  x == y    | 如果x等於y,則傳回TRUE        
+  x != y    | 如果x不等於y,則傳回TRUE      
+  x > y     | 如果x大於y,則傳回TRUE    
+  x >= y    | 如果x大於或等於y,則傳回TRUE      
+  x < y     | 如果小於y,則傳回TRUE     
+  x <= y    | 如果x小於或等於y,則傳回TRUE      
+  x & y     | 相當於AND運算,如果x和y皆是TRUE則傳回TRUE     
+  !x        | 相當於NOT運算,傳回非x        
+  xor(x,y)  | 相當於XOR運算,如果x和y不同,則傳回TRUE     
+  
+which()列出符合條件的索引值     
+which.max()可列出最大值的第1個索引值        
+which.min()可列出最小值的第1個索引值        
+is.na()判斷是否為NA     
+any()有1元素是TRUE即傳回TRUE        
+all()所有參數皆為TRUE才傳回TRUE     
+
+### 4-8 不同長度向量物件相乘的應用
+### 4-9 向量物件元素名稱    
+<center>內建數據集：</center>   
+islands 
+rivers    
+state.name    
+state.region    
+```{r}
+?islands
+is.vector(islands)
+my.islands <- islands
+names(my.islands)
+names(vec01) <- c("Mary", "John", "Amanda", "Tom", "Alice")
+vec01["Amanda"] <- 50
+```
+
+```{r}
+islands 
+rivers    
+state.name    
+state.region
+```
+---   
+# afterclass    
+## 是非題   
+1.(X)有2個指令如下:     
+    > x <- -2.5:-3.9    
+    >length(x)  
+    上述指令執行結果如下:   
+    [1]3    
+
+```{r}  
+x <- -2.5:-3.9    
+length(x)  
+```
+
+3.(X)下列指令會出現Warning message:     
+    > x <- 1:5  
+    > y <- x + 1:10 
+
+```{r}  
+x <- 1:5  
+y <- x + 1:10
+y
+```
+
+5.(X)有2個指令如下:          
+    > x <- c(7,12,6,20,9)   
+    > sort(x)   
+    上述指令執行結果如下所示:   
+    [1] 20 12 9 7 6 
+    
+```{r}
+x <- c(7,12,6,20,9)   
+sort(x)
+```
+
+7.(O)字串是可以用雙引號(")也可以用單引號(')包夾   
+
+9.(O)有2個指令如下:     
+    > x <- 1:5  
+    > x[-(2:5)]  
+    上述指令執行結果如下:   
+    [1]1  
+    
+```{r}
+x <- 1:5
+x[-(2:5)]
+```
+
+11.(O)有2個指令如下:     
+    > x <- c(10,NA,3,8)      
+    > x[x > 6]  
+    上述指令執行結果如下:   
+    [1] 10 NA 8 
+    
+```{r}
+x <- c(10,NA,3,8) 
+x[x > 6]  
+```
+
+13.(x)有3個指令如下:                
+    > x <- c(5,7)   
+    > names(x) <- c("Game1","Game2")    
+    > names(x) <- NULL  
+    上述指令相當於是將x向量元素值設為0  
+    
+```{r}
+x <- c(5,7)   
+names(x) <- c("Game1","Game2")    
+names(x) <- NULL
+```
+
+15.(X)R語言邏輯運算的結果只可能有兩種:TRUE與FALSE   
+
+17.(X)有一道指令如下:       
+    > x <- seq(-10,10,15)   
+    執行後x向量的最大值是10     
+    
+```{r}
+seq(-10,10,15)
+```
+
+## 選擇題   
+1.(D)假設有n個字母,想了解這n個字母的排列組合方法,下列哪一個函數可以最方便解這類問題            
+    (A)max() (B)mean() (C)sd() (D)prod()        
+3.(A)以下指令會得到何數值結果?      
+    > seq(1,9,length.out = 5)      
+    (A)[1] 1 3 5 7 9   (B)[1] 1 6  
+    (C)[1] 1 2 3 4 5 6 (D)[1] 5 6 7 8 9 
+    
+```{r}
+seq(1,9,length.out = 5)
+```
+5.(A)以下指令會得到何數值結果?            
+    > x <- mean(8:12)   
+    > x      
+    (A)[1]10 (B)[1]8 (C)[1]12 (D)[1]5   
+    
+```{r}
+x <- mean(8:12)   
+x 
+```
+7.(D)以下指令會得到何數值結果?       
+    > max(c(9,99,Inf,NA))   
+    (A)[1]9 (B)[1]99 (C)[1]Inf (D)[1]NA 
+    
+```{r}
+max(c(9,99,Inf,NA))
+```
+9.(A)以下指令會得到何數值結果?           
+    > x <- c("Hi!", "Good", "Morning")  
+    > nchar(x)  
+    (A)[1] 3 4 7 (B)[1]3 (C)[1]14 (D)[1] 7 7    
+    
+```{r}
+x <- c("Hi!", "Good", "Morning")  
+nchar(x)  
+```
+11.(B)以下指令會得到何數值結果?     
+    > x <- c(8,12,19,4,5)   
+    > which.max(x)  
+    (A)[1]19 (B)[1]3 (C)[1]4 (D)[1]5    
+    
+```{r}
+x <- c(8,12,19,4,5)   
+which.max(x)
+```
+13.(D)有以下指令:       
+    > x1 <- c(9,6,8,3,4)     
+    > x2 <- c(6,10,1,2,5)      
+    > y <- x1 >= x2  
+    將y放進哪一個函數內可得到下列結果:  
+    [1]FALSE    
+    (A)any() (B)rev() (C)sort() (D)all()    
+ 
+```{r}
+x1 <- c(9,6,8,3,4) 
+x2 <- c(6,10,1,2,5)   
+y <- x1 >= x2
+any(y)
+rev(y)
+sort(y)
+all(y)
+```
+15.(A)有以下指令:        
+    > x <- 1:10       
+    > names(x) <- letters[x]        
+    > x      
+    以下哪種方法不能傳回x向量的前5個元素?       
+    (A)x["a","b","c","d","e"] (B)x[1:5]     
+    (C)head(x,5)              (D)x[letters[1:5]]    
+
+```{r}
+x <- 1:10 
+names(x) <- letters[x]    
+x
+
+x[1:5]
+
+head(x,5)
+
+x[letters[1:5]]
+```
+17.(C)以下指令集會得到何數值結果?        
+    > c(3,2,1) == 2     
+    (A)[1]TRUE (B)[1]FALSE (C)[1]FALSE TRUE FALSE (D)[1]NA  
+    
+```{r}
+c(3,2,1) == 2
+```
+---
+# selfpractice    
+## 是非題   
+2.(X)有2個指令如下:          
+    > x <- 1:3  
+    > y <- x + 9:11  
+    上述指令執行後,下列的執行結果是正確的:  
+    >y  
+    [1]10 11 12     
+    
+```{r}  
+x <- 1:3  
+y <- x + 9:11
+y
+```
+4.(O)在R語言的Console視窗,若某列以數學符號(+.-.*./)做結尾,此時R語言的編譯器會知道下一列式接續此列   
+6.(X)有1個指令如下:           
+    > sum(c(99,NA,101,NA),na.rm=TRUE)   
+    上述指令執行時會有錯誤訊息產生
+
+```{r}
+sum(c(99,NA,101,NA),na.rm=TRUE)
+```
+8.(O)有4個指令如下:  
+    > x1 <- c(1:2)  
+    > x2 <- c(1.5:2.5)  
+    > x3 <- c(x1,x2)    
+    > class(x3)  
+    上述指令執行結果如下:   
+    [1] "numeric"   
+    
+```{r}
+x1 <- c(1:2)  
+x2 <- c(1.5:2.5)  
+x3 <- c(x1,x2)    
+class(x3) 
+```
+10.(X)有2個指令如下:     
+    > head(letters)  
+    [1] "a" "b" "c" "d" "e" "f"     
+    > letters[c(1,5)]   
+    上述指令執行結果如下:   
+    [1] "e" 
+    
+```{r}
+head(letters)
+letters[c(1,5)]
+```
+12.(X)有3個指令如下:     
+    > x <- c(10,Inf,3,8)    
+    > y <- x > 6    
+    > any(y)    
+    上述指令執行結果如下:   
+    [1] FALSE   
+    
+```{r}
+x <- c(10,Inf,3,8)    
+y <- x > 6    
+any(y)
+```
+14.(O)有2個指令如下:                
+    > x.small <- names(head(sort(islands)))     
+    > y.small <- names(sort(islands)[1:6])      
+    上述x.small和y.small兩個向量內容是相同  
+    
+```{r}
+x.small <- names(head(sort(islands)))
+y.small <- names(sort(islands)[1:6])
+```
+16.(O)有一道指令如下:       
+    > x[ is.na(x) ] <- 0    
+    設定後,會將x物件內的所有缺失值以0替代   
+    
+```{r}
+x[ is.na(x) ] <- 0
+```
+## 選擇題   
+2.(無答案)以下指令會得到和數值結果?       
+    > x <- 1:3  
+    > y <- x+1:6      
+    > y    
+    (A)[1] 1 3 5 (B)[1] 2 4 5 (C)[1] 2 4 6 5 7 8 (D)[1] 2 4 5 6 8 9     
+    
+```{r}  
+x <- 1:3  
+y <- x + 1:6      
+y    
+```
+4.(B)以下哪一指令會得到下列結果?      
+    [1] 2 2 2       
+    (A)> rep(3,2)        
+    (B)> rep(2,3)        
+    (C)> rep(2,2,2)      
+    (D)> rep(3,2,2)    
+```{r}  
+rep(3,2)
+rep(2,3)
+rep(2,2,2)  
+rep(3,2,2)  
+```
+6.(C)以下指令會得到何數值結果?       
+    > x <- c(12,7,8,4,19)  
+    > rank(x)    
+    (A)[1] 12 7 8 4 19  
+    (B)[1] 4 7 8 4 19   
+    (C)[1] 4 2 3 1 5    
+    (D)[1] 19 12 8 7 4  
+    
+```{r}  
+x <- c(12,7,8,4,19) 
+rank(x) 
+```     
+8.(C)以下指令會得到何數值結果?     
+    > max(c(9,99,Inf,NA),na.rm=TRUE)      
+    (A)[1] 9 (B)[1] 99 (C)[1] lnf (D)[1] NA  
+    
+```{r}  
+max(c(9,99,Inf,NA),na.rm=TRUE)  
+```     
+10.(B)以下指令會得到何結果?      
+    > head(letters,5)    
+    [1] "a" "b" "c" "d" "e"      
+    > letters[c(1,5)]    
+    (A)[1] "a" (B)[1] "a" "e" (C)[1] "b" (D)[1] "b" "c" "d"     
+    
+```{r}  
+head(letters,5) 
+letters[c(1,5)] 
+```     
+12.(A)以下指令會得到何數值結果?     
+    > x <- c(6,9,NA,4,2)      
+    > x[x > 5 & !is.na(x)]   
+    (A)[1] 6 9 (B)[1] 6 9 NA (C)[1] 6 9 NA 4 2 (D)[1] 4 2   
+    
+```{r}  
+x <- c(6,9,NA,4,2)  
+x[x > 5 & !is.na(x)]    
+```     
+14.(D)使用head()或tail()函數,若省略第2個參數,系統將自動返回多少元素?     
+    (A)1 (B)3 (C)5 (D)6   
+16.(B)以下指令集會得到何數值結果?        
+    > x <- seq(-2,2,0.5)   
+    > length(x)  
+    (A)[1] 5 (B)[1] 9 (C)[1] 2 (D)[1] 8     
+
+```{r}  
+x <- seq(-2,2,0.5)  
+length(x)   
+```    
+## 複選題     
+1.(BC)以下哪些方式可以用來計算1,2,3,4的平均值,執行結果如下所示:       
+    [1] 2.5     
+    (A)mean(1,2,3,4) (B)mean(c(1,2,3,4))        
+    (C)sum(c(1,2,3,4))/4 (D)max(c(1,2,3,4))      
+    (E)ave(c(1,2,3,4))      
+    
+```{r}
+mean(1,2,3,4)
+mean(c(1,2,3,4))
+sum(c(1,2,3,4))/4
+max(c(1,2,3,4))
+ave(c(1,2,3,4))
+```
+
+2.(ABD)以下哪些函數可以用來產生x向量,x向量的值如下:               
+    [1] 1 2 3 4 5 6 7 8 9 10                
+    (A)seq(10)     (B)seq_len(10)       
+    (C)numeric(10) (D)1:10      
+    (E)seq(1,10,10)        
+    
+```{r}
+seq(10)
+seq_len(10)
+numeric(10)
+1:10
+seq(1,10,10)
+```
+## 第四章實作題  
+1.建立家人的向量資料        
+a.將家人名字(至少10人)建立為字串向量,可用英文,同時為每一個元素建立名稱,並列印出來        
+```{r}
+fname <- c("Austin","Ben","Charlie","Danial","Ellen","Frank","Golden",
+"Helen","Ivan","Jessie")
+fname
+```
+b.將家人或親人(至少10人)的血型建立為字元向量,同時為每一個元素建立名稱,並列印出來              
+```{r}
+fblood <- c("A","O","O","B","O","B","A","AB","O","O")
+names(fblood) <- fname
+fblood
+```
+c.將家人或親人(至少10人)的年齡建立為整數向量,同時為每一個元素建立名稱,並列印出來
+```{r}
+fage <- c(22,23,21,20,20,19,18,18,19,20)
+names(fage) <- fname
+fage
+```
+d.將上述所建的年齡向量,執行從小排序到大           
+```{r}
+sort(fage)
+```
+e.將上述所建的年齡向量,執行從大排序到小       
+```{r}
+sort(fage,TRUE)
+```
+2.參考實例ch4_84,列出當月有31天的月份      
+```{r}
+month.data <- c(31,28,31,30,31,30,31,31,30,31,30,31)
+names(month.data) <- month.name
+names(month.data[month.data==31])
+```
+3.使用系統內建數據集islands,列出排序第30和35名的島名稱和面積        
+```{r}
+islands1 <- sort(my.islands,FALSE)
+islands1[30]
+islands1[35]
+```
+4.使用系統內建數據集islands,列出最小15大的島名稱和面積      
+```{r}
+islands1[1:15]
+```
+5.使用系統內建數據集islands,列出前15大的島名稱和面積        
+```{r}
+islands1[34:48]
+```
+6.使用系統內建數據集islands,分別列出排序奇數的島名稱和面積      
+```{r}
+odd <- seq(1,48,2)
+islands1[odd]
+```
+7.使用系統內建數據集islands,分別列出排序偶數的島名稱和面積      
+```{r}
+even <- seq(2,48,2)
+islands1[even]
+```
+## 第三章實作題     
+1.求99的平方.立方和平方根,下列只列出結果:       
+```{r}
+99^2
+99^3
+sqrt(99)
+```
+2.x=345.678,將x放入round().signif()使用預設值測試,並依次序列出結果:     
+```{r}
+x = 345.678
+round(x)
+signif(x)
+```
+3.重複上一習題的round(),參數digits從-2測試到2,並列出結果:       
+```{r}
+round(x,-2)
+round(x,-1)
+round(x,0)
+round(x,1)
+round(x,2)
+```
+4.重複習題2的signif(),參數digits從1測試到5,並列出結果:      
+```{r}
+signif(x,1)
+signif(x,2)
+signif(x,3)
+signif(x,4)
+signif(x,5)
+```
+5.x=674.378,將x放入floor().ceiling()和trunc(),使用預設值測試,並依次序列出結果:      
+```{r}
+x=674.378
+floor(x)
+ceiling(x)
+trunc(x)
+```
+6.重複上一習題,將x改為負值-674.378,並列出結果:      
+```{r}
+x=-674.378
+floor(x)
+ceiling(x)
+trunc(x)
+```
+7.計算下列執行結果:     
+```{r}
+Inf+100
+Inf-Inf+10
+NaN+Inf
+Inf-NaN
+NA+Inf
+Inf-NA
+NaN+NA
+```
+8.將上述資料(a-g)執行結果用下列函數測試並列出結果;      
+```{r}
+is.na(Inf+100)
+is.na(Inf-Inf+10)
+is.na(NaN+Inf)
+is.na(Inf-NaN)
+is.na(NA+Inf)
+is.na(Inf-NA)
+is.na(NaN+NA)
+
+is.nan(Inf+100)
+is.nan(Inf-Inf+10)
+is.nan(NaN+Inf)
+is.nan(Inf-NaN)
+is.nan(NA+Inf)
+is.nan(Inf-NA)
+is.nan(NaN+NA)
+
+is.finite(Inf+100)
+is.finite(Inf-Inf+10)
+is.finite(NaN+Inf)
+is.finite(Inf-NaN)
+is.finite(NA+Inf)
+is.finite(Inf-NA)
+is.finite(NaN+NA)
+
+is.infinite(Inf+100)
+is.infinite(Inf-Inf+10)
+is.infinite(NaN+Inf)
+is.infinite(Inf-NaN)
+is.infinite(NA+Inf)
+is.infinite(Inf-NA)
+is.infinite(NaN+NA)
+```
+
+---
+# 上課筆記    
+Ctrl+Enter只執行那行   
+str()確認資料結構
+nchar()字元位數
+length()字元數量
+names()查詢向量元素名稱/更改向量元素名稱        

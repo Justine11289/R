@@ -1,0 +1,381 @@
+---
+title: "wk11_0506_"
+author: "Justine"
+date: "2021/5/6"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: false 
+
+---
+
+# [Home](Home.html)              
+# inclass   
+<pre>
+5. 請利用Excel建立14-5-1節的試算表，然後利用R語言計算下列結果。
+      a. 各茶產品各年度的銷售總量。
+      b. 各茶產品各年度的銷售總營業額。
+      c. 每一位業務員在各年度的總營業額。
+</pre>
+```{r}
+#讀取剪貼簿資料
+ #x <- read.table(file="clipboard", sep="\t", header = T) 
+ #print(x)
+```
+
+```{r}
+excelCSV <- file.path("ch14-5-1Tea.csv") #file.path:將片段路徑結合成一個目錄
+#xCsv <- read.csv(excelCSV, sep=",")
+x <- read.csv(excelCSV, sep=",")
+```
+
+
+```{r}
+# a. 各茶產品各年度的銷售總量。
+teas <- unique(x[,"Product"])
+years <- unique(x[,"Year"])
+
+n_tea <- length(teas) #計算向量物件長度
+n_year <- length(years)
+
+ty.df <- data.frame(numeric(n_tea),numeric(n_year)) #建立數據框
+row.names(ty.df) <- teas
+colnames(ty.df) <- years
+
+str(ty.df)
+
+n <- length(x[,1])
+```
+
+```{r}
+n <- length(x[,1])
+for(i in 1:n)
+{
+  if(x[i,"Product"] == "Black Tea")
+  {
+    if (x[i,"Year"] == 2015)ty.df["Black Tea","2015"] = ty.df["Black Tea","2015"] + x[i,"Quantity"]
+    if(x[i,"Year"] == 2016) ty.df["Black Tea","2015"] = ty.df["Black Tea","2015"] + x[i,"Quantity"]
+  }
+}
+ty.df
+
+```
+
+```{r}
+n <- length(x[,1])
+
+for (i in 1 : n)
+{
+  for (k in years)
+  {
+    if (x[i, "Year"] == k)
+     {
+      for (j in teas)
+        if (x[i, "Product"]== j) ty.df[j,as.character(k)] = ty.df[j,as.character(k)] + x[i, "Quantity"]
+  }
+  }
+}
+  
+ty.df
+
+```
+
+```{r}
+class(x)
+str(x)
+colnames(x)
+row.names(x)
+```
+
+TA專區
+```{r}
+#ch7_18
+
+baskets.NBA2016.Team <- x
+
+ baskets.TNBA2016 <- t(baskets.NBA2016.Team) #Trandpose
+ baskets.NBA.dfTeam <- data.frame(baskets.TNBA2016)
+ baskets.NBA.dfTeam
+
+str(baskets.NBA2016.Team )
+class(baskets.NBA2016.Team ) 
+
+str(baskets.TNBA2016)
+class(baskets.TNBA2016)
+      
+str( baskets.NBA.dfTeam)
+class(baskets.NBA.dfTeam)
+
+
+
+```
+
+# afterclass        
+```{r}
+# ch13_1.R
+ch13_1 <- function()
+{
+  an_info <- matrix(c(8,9,6,5,7,2, 10,6,8),ncol=3)
+  colnames(an_info)<- c("Tiger","Lion","Leopard")
+  rownames(an_info)<- c("Day 1", "Day 2", "Day 3")
+  print(an_info)
+  apply(an_info, 1, min)
+  apply(an_info, 2, max)
+  apply(an_info, 2, sd)
+  apply(an_info, 1, sum)
+}
+```
+
+```{r}
+# ch13_3.R
+ch13_3 <- function()
+{
+  an_info <- matrix(c(8,NA,6,5,7,2, 10,6,8),ncol=3)
+  colnames(an_info)<- c("Tiger","Lion","Leopard")
+  rownames(an_info)<- c("Day 1", "Day 2", "Day 3")
+  print(an_info)
+  apply(an_info, 2, max, na.rm=TRUE)
+}
+```
+
+```{r}
+# ch13_5.R
+ch13_5 <- function()
+{
+  sstr <- as.character(state.region)
+  vec.income <- state.x77[,2]
+  names(vec.income)<- NULL
+  a.income <- tapply(vec.income,factor(sstr,
+                                       levels=c("Northeast","South","North Central",
+                                                "West")), mean)
+  return(a.income)
+}
+str(iris)
+head(iris)
+```
+
+```{r}
+#ch13_7
+sapply(iris,class)
+```
+
+```{r}
+#ch13_9
+sapply(iris,function(y) ifelse(is.numeric(y), mean(y), NA))
+```
+
+---   
+
+# selfpractice        
+```{r}
+# ch13_2.R
+ch13_2 <- function()
+{
+  an_info <- matrix(c(8,NA,6,5,7,2, 10,6,8),ncol=3)
+  colnames(an_info)<- c("Tiger","Lion","Leopard")
+  rownames(an_info)<- c("Day 1", "Day 2", "Day 3")
+  print(an_info)
+  apply(an_info, 2, max)
+}
+```
+
+```{r}
+# ch13_4.R
+ch13_4 <- function(deg, customer, unitprice = 50)
+{
+  listprice <- deg*unitprice*ifelse(deg>150,0.8, 1)
+  adj <- sapply(customer, switch, goverment=0.8, company = 1.2, 1)
+  finalprice <- listprice*adj
+  round(finalprice)
+}
+deginfo <- c(80, 80, 200, 200)
+custinfo <- c("goverment", "company", "company","goverment")
+ch13_4(deginfo, custinfo)
+
+poorinfo <- c(TRUE, FALSE, FALSE, TRUE)
+class(poorinfo)
+class(deginfo)
+class(custinfo)
+testinfo <- data.frame(deginfo, custinfo, poorinfo)
+sapply(testinfo,class)
+
+lapply(testinfo, unique)
+
+sapply(testinfo, unique)
+sapply(testinfo, unique, simplify= FALSE)
+
+tapply(state.region, state.region, length)
+str(state.x77)
+tapply(state.x77[,1],state.region,sum)
+tapply(state.x77[,2],state.region,mean)
+```
+
+```{r}
+#ch13_6
+lapply(iris,class)
+```
+
+```{r}
+#ch13_8
+sapply(iris,mean)
+```
+
+```{r}
+#ch13_10
+tapply(iris$Petal.Length, iris$Species, mean)
+tapply(iris$Sepal.Length, iris$Species, mean)
+```
+
+## 第十三章是非題              
+1.(O)使用apply( )函數時，如果物件資料是矩陣，若第2個參數MARGIN是2，代表將計算每一個欄(column)        
+2.(O)使用apply( )函數時，如果物件資料是矩陣，若第2個參數MARGIN是1，代表將計算每一個列(row)       
+3.(X)使用sapply( )函數後，所傳回的資料是串列(list)        
+
+## 第十三章選擇題       
+1.(A)使用apply( )函數時，若物件內含NA，應如何設定參數，則可以忽略此NA產生的影響?       
+  (A) na.rm = TRUE (B) na.rm = FALSE            
+  (C) is.na = TRUE (D) is.na = FALSE            
+2.(D)哪一個函數主要是使用一個因子或因子列表，執行指定的函數操作，最後獲得彙總資訊?       
+  (A)apply( ) (B)sapply( ) (C)lapply( ) (D)tapply( )        
+3.(C)有函數如下：  
+```{r}
+ex <- function()
+{
+  an <- matrix(c(8,NA,6,5,7,2,10,6,8),ncol = 3)
+  colnames(an) <- c("Tiger", "Lion", "Leopard")
+  rownames(an) <- c("Day 1", "Day 2", "Day 3")
+  print(an)
+  apply(an, 2, max, na.rm = TRUE)
+}
+ex()
+```
+  上述執行後，Tiger 最大出現次數為何？        
+  (A)	10 (B) NA (C) 8 (D) 7       
+4.(D)有函數如下：  
+```{r}
+ex <- function()
+{
+  an <- matrix(c(8,NA,6,5,7,2,10,6,8),ncol = 3)
+  colnames(an) <- c("Tiger", "Lion", "Leopard")
+  rownames(an) <- c("Day 1", "Day 2", "Day 3")
+  print(an)
+  apply(an, 2, max, na.rm = TRUE)
+}
+ex()
+```
+  上述執行後，Lion 最大出現次數為何？       
+  (A) 10 (B) NA (C) 8 (D) 7       
+5.(B)有函數如下：       
+```{r}
+ex <- function()
+{
+  an <- matrix(c(8,NA,6,5,7,2,10,6,8),ncol = 3)
+  colnames(an) <- c("Tiger", "Lion", "Leopard")
+  rownames(an) <- c("Day 1", "Day 2", "Day 3")
+  print(an)
+  apply(an, 2, max)
+}
+ex()
+```
+  上述執行後，Tiger 最大出現次數為何？               
+  (A)	10 (B) NA (C) 8 (D) 7         
+6.(A)有函數如下：        
+```{r}
+ex <- function()
+{
+  an <- matrix(c(8,NA,6,5,7,2,10,6,8),ncol = 3)
+  colnames(an) <- c("Tiger", "Lion", "Leopard")
+  rownames(an) <- c("Day 1", "Day 2", "Day 3")
+  print(an)
+  apply(an, 2, max)
+}
+ex()
+```
+  上述執行後，Leopard 最大出現次數為何？        
+  (A) 10 (B) NA (C) 8 (D) 7       
+7.(B)已知矩陣a內容如下：        
+  > a <- matrix(1:9, nrow = 3, byrow = TRUE)       
+  > a       
+        [,1] [,2] [,3]    
+  [1,]    1    2    3     
+  [2,]    4    5    6     
+  [3,]    7    8    9     
+  若想要知道每一個column的和，如下所示，可以使用以下何指令：      
+  [1] 12 15 18    
+  (A) apply(a, 1, sum) (B) apply(a, 2, sum)     
+  (C) sum(a)           (D) sum(a[, 1:3])      
+  
+```{r}
+a <- matrix(1:9, nrow = 3, byrow = TRUE)
+a
+apply(a, 1, sum)
+apply(a, 2, sum)
+sum(a)
+sum(a[, 1:3])
+```
+  
+8.(A)已知矩陣a內容如下：        
+  > a <- matrix(1:9, nrow = 3, byrow = TRUE)       
+  > a       
+        [,1] [,2] [,3]    
+  [1,]    1    2    3     
+  [2,]    4    5    6     
+  [3,]    7    8    9     
+  若想要知道每一個row 的和，如下所示，可以使用以下何指令：   
+  [1] 6 15 24   
+  (A) apply(a, 1, sum) (B) apply(a, 2, sum)     
+  (C) sum(a)           (D) sum(a[, 1:3])      
+  
+```{r}
+a <- matrix(1:9, nrow = 3, byrow = TRUE)
+a
+apply(a, 1, sum)
+apply(a, 2, sum)
+sum(a)
+sum(a[, 1:3])
+```
+
+9.(D)參考下列data.frame:       
+  > age <- c(26,29,29,24,25,21,23,29)       
+  > gender <- c("M","F","M","F","M","F","M","F")      
+  > a <- data.frame(age, gender)    
+  > a     
+    age gender      
+  1  26	     M	      		
+  2  29	     F			
+  3  29	     M			
+  4  24	     F			
+  5  25	     M			
+  6  21	     F			
+  7  23	     M			
+  8  29	     F
+  想要分別計算男生、女生的平均年紀，如下所示，可以使用以下何指令：            
+        F     M       
+    25.75 25.75     
+  (A) mean(a$age, by = a$gender)
+  (B) mean(a["age", "gender"])
+  (C) sapply(a, mean)
+  (D) tapply(a$age, a$gender, mean)
+
+  
+```{r}
+age <- c(26,29,29,24,25,21,23,29)       
+gender <- c("M","F","M","F","M","F","M","F")      
+a <- data.frame(age, gender)    
+a 
+mean(a$age, by = a$gender)
+mean(a["age", "gender"])
+sapply(a, mean)
+tapply(a$age, a$gender, mean)
+```
+
+---       
+
+# 補充筆記        
+apply(x,Margin,Fun)       
+sapply(x,Fun) 簡化執行結果        
+lapply(x,Fun) 傳回串列        
+tapply(x,Index,Fun) 執行指定函數操作        

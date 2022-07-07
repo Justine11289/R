@@ -1,0 +1,327 @@
+---
+title: "Ch8Practice"
+author: "Justine"
+date: "2021/7/3"
+output:
+  html_document:    
+    toc: yes    
+    toc_depth: 3
+    toc_float:    
+      collapsed: no   
+      smooth_scroll: yes  
+---
+# [Home](Home.html)   
+
+### 是非題  
+1.(O)數據框(data frame)與串列(list)的相同點在於可以同時儲存數值資料與文字資料    
+2.(O)數據框(data frame)與串列(list)的差別之一是串列中每一元素的長度可以不相等，而數據框中每一欄的長度需相等    
+3.(O)有系列指令如下：    
+    > a <- c(1,2,3,4)   
+    > b <- list(1,2,3,4)  
+    上述指令執行後，a[[1]] 和b[[1]] 的執行結果是相同  
+    
+```{r}
+a <- c(1,2,3,4)
+a[[1]] 
+b <- list(1,2,3,4) 
+b[[1]] 
+```
+
+4.(X)有系列指令如下：    
+    > x.list <- list(name="x.name",gender="x.sex")  
+    對上述x.list物件而言，第2個元素的物件名稱是"x.sex"，未來我們可以使用x.list$x.sex存取此元素資料    
+    
+```{r}
+x.list <- list(name="x.name",gender="x.sex")
+x.list[[2]]
+x.list$x.sex
+```
+
+5.(X)有系列指令如下：    
+    > A = c('A','B','A','A','B')  
+    > B = c('Winter','Summer','Summer','Spring','Fall')   
+    > x.list <- list(A,B)    
+    > length(x.list)    
+    上述執行結果如下：    
+    [1] 10
+    
+```{r}
+A = c('A','B','A','A','B')  
+B = c('Winter','Summer','Summer','Spring','Fall')   
+x.list <- list(A,B)
+length(x.list)
+```
+    
+6.(X)有系列指令如下：    
+    > x.list <- list(name = "x.name",gender = "x.sex")  
+    > x.list[["name"]]  
+    上述指令執行時會有錯誤產生    
+    
+```{r}
+x.list <- list(name = "x.name",gender = "x.sex")  
+x.list[["name"]]
+```
+    
+7.(O)有系列指令如下：    
+    > x.list    
+    $name   
+    [1] "x.name"    
+    $gender    
+    [1] "x.sex"   
+    > x.list$gender <- NULL  
+    上述指令執行後，串列x.list將只剩下一個元素   
+
+8.(X)cbind()函數一般也常用在串列合併，有系列指令如下：   
+    > x.name <- c("John","Mary")  
+    > x.sex <- c("M","F")  
+    > x.age <- c(20,23) 
+    > x.weight <- c(70,50)  
+    > x.list1 <- list(x.name,x.sex)  
+    > x.list2 <- list(age,x.weight)    
+    > x.list3 <- cbind(x.list1,x.list2)     
+    > x.list3   
+    上述執行結果如下：  
+    > x.list3   
+    [[1]]   
+    [1] "John" "Mary"   
+    [[2]]   
+    [1] "M" "F"    
+    [[3]]   
+    [1] 23 20   
+    [[4]]   
+    [1] 70 50    
+    
+```{r}
+x.name <- c("John","Mary")  
+x.sex <- c("M","F")  
+x.age <- c(20,23) 
+x.weight <- c(70,50)  
+x.list1 <- list(x.name,x.sex) 
+x.list2 <- list(x.age,x.weight)
+x.list3 <- cbind(x.list1,x.list2)
+x.list3   
+```
+9.(O) 使用"[ ]"也可取得串列元素的內容，所傳回的資料類型是串列   
+
+---   
+
+### 選擇題    
+1.(D)下列哪一類型的數據結構使用的彈性最大?   
+    (A)向量Vector       (B)矩陣Matrix   
+    (C)數據框Data Frame (D)串列List   
+2.(D)有系列指令如下：    
+    > id <- c(34453,72456,87659)  
+    > name <- c("John","Mary")  
+    > lst1 <- list(stud.id = id,stud.name = name)   
+    若要利用串列"lst1"得到文字向量"name"中的資料"John"，可以用哪一個指令？  
+    (A)lst1$name[1]         (B)lst1["stud.name"][1]   
+    (C)lst1[[stud.name]][1] (D)lst1[[2]][1] 
+    
+```{r}
+id <- c(34453,72456,87659)
+name <- c("John","Mary")
+lst1 <- list(stud.id = id,stud.name = name) 
+lst1$name[1]
+lst1["stud.name"][1]
+#lst1[[stud.name]][1]
+lst1[[2]][1]
+```
+    
+3.(C)有系列指令如下：    
+    > id <- c(34453,72456,87659)  
+    > name <- c("John","Mary","Jenny")  
+    > gender <- c("M","F","F")  
+    > height <- c(167,156,180)  
+    下列哪一個指令是有問題?     
+    (A)data.frame(id, name, gender, height) (B)list(id, name, gender, height)  
+    (C)matrix(id, name, gender, height)     (D)cbind(id, name, gender, height)  
+    
+```{r}
+id <- c(34453,72456,87659)  
+name <- c("John","Mary","Jenny")  
+gender <- c("M","F","F")  
+height <- c(167,156,180) 
+data.frame(id, name, gender, height)
+list(id, name, gender, height)
+#matrix(id, name, gender, height)
+cbind(id, name, gender, height)
+```
+    
+4.(A)有系列指令如下：           
+    > id <- c(34453,72456,87659)  
+    > x.list <- list("NY","2020",id)  
+    下列哪一個指令可以獲得串列第2個元素內容?  
+    (A)> x.list[[2]]  (B)> x.list[[1]]  
+    (C)> x.list$2020  (D)> x.list$NY  
+    
+```{r}
+id <- c(34453,72456,87659)  
+x.list <- list("NY","2020",id) 
+x.list[[2]]
+x.list[[1]] 
+#x.list$2020
+x.list$NY
+```
+    
+5.(D)有一個串列內容如下：  
+    > x.list  
+    $City 
+    [1]"NY"     
+    $Season     
+    [1]"2020"     
+    $Number   
+    [1]34453 72456 87659  
+    下列哪一個指令無法取得x.list串列Number的第2筆資料內容?      
+    (A)> x.list[[3]][2]        (B)> x.list$Number[2] 
+    (C)> x.list[["Number"]][2] (D)> x.list["Number"][2]   
+    
+```{r}
+Number <- c(34453,72456,87659)
+x.list <- list(City="NY",Season="2020",Number=Number)
+x.list[[3]][2] 
+x.list$Number[2] 
+x.list[["Number"]][2]
+x.list["Number"][2]
+```
+    
+6.(D)有一個串列內容如下：  
+    > x.list  
+    $City 
+    [1]"NY"     
+    $Season     
+    [1]"2020"     
+    $Number     
+    [1]34453 72456 87659       
+    下列哪一個指令可以得到下列結果?   
+    $Season     
+    [1]"2020"     
+    $Number     
+    [1]34453 72456 87659    
+    (A)> x.list[[c(2:3)]]   
+    (B)> c(x.list[[2]],x.list[[3]])     
+    (C)> x.list[[-1]]     
+    (D)> x.list[-1]   
+
+```{r}
+Number <- c(34453,72456,87659)
+x.list <- list(City="NY",Season="2020",Number=Number)
+#x.list[[c(2:3)]]
+c(x.list[[2]],x.list[[3]])
+#x.list[[-1]] 
+x.list[-1]
+```
+
+7.(C)有一個串列內容如下：  
+    > x.list      
+    $City     
+    [1]"NY"     
+    $Season     
+    [1]"2020"     
+    $Number     
+    [1]34453 72456 87659    
+    下列哪一個指令無法為串列增 加第4個元素?     
+    (A)> x.list[["Country"]] <- "USA"      
+    (B)> x.list["Country"] <- "USA"       
+    (C)> x.list"Country" <- "USA"     
+    (D)> x.list[4] <- "USA"       
+    
+```{r}
+Number <- c(34453,72456,87659)
+x.list <- list(City="NY",Season="2020",Number=Number)
+x.list[["Country"]] <- "USA"
+x.list["Country"] <- "USA"
+#x.list"Country" <- "USA"
+x.list[4] <- "USA"
+```
+    
+8.(BCD)請參考下列資料        
+    > str(baskets.Merge)       
+    下列哪一個敘述是錯的?     
+    (A)第1列，告訴你這是一個串列，此串列有5個元素     
+    (B)第4列，由$開頭，告訴你這是第3個元素，此元素名稱是"score.Info"，元素是數值格式num，這是2列4欄的矩陣     
+    (C)第8列，由$開頭，告訴你這是第4個元素，此元素名稱是"Heights"，元素是數值格式num，內容是192和199     
+    (D)第9列，由$開頭，告訴你這是第5個元素，此元素名稱是"Ages"，元素是數值格式num，內容是25和45     
+
+---   
+
+### 複選題    
+1.(AD)下列哪些物件可以同時儲存數值資料與文字資料?   
+    (A)串列list    (B)矩陣matrix    
+    (C)陣列組array (D)數據框data frame   (E)向量vector        
+
+---   
+### 實作題    
+1.麻將是由下列資料組成：    
+a.季節，春、夏、秋、冬，各1顆    
+```{r}
+Season <- c("春","夏","秋","冬")
+mahjonga <- list(Season)
+mahjonga
+```
+b.花色，梅、蘭、竹、菊，各1顆     
+```{r}
+Variety <- c("梅","蘭","竹","菊")
+mahjongb <- list(Variety)
+mahjongb
+```
+c.紅中、發財、白板，各4顆   
+```{r}
+Word <- c("紅中","紅中","紅中","紅中","發財","發財","發財","發財","白板","白板","白板","白板")
+mahjongc <- list(Word)
+mahjongc
+```
+d.1萬到9萬各4顆   
+```{r}
+Million <- c("1萬","1萬","1萬","1萬","2萬","2萬","2萬","2萬","3萬","3萬","3萬","3萬","4萬","4萬","4萬","4萬","5萬","5萬","5萬","5萬","6萬","6萬","6萬","6萬","7萬","7萬","7萬","7萬","8萬","8萬","8萬","8萬","9萬","9萬","9萬","9萬")
+mahjongd <- list(Million)
+mahjongd
+```
+e.1條到9條各4顆   
+```{r}
+Strip <- c("1條","1條","1條","1條","2條","2條","2條","2條","3條","3條","3條","3條","4條","4條","4條","4條","5條","5條","5條","5條","6條","6條","6條","6條","7條","7條","7條","7條","8條","8條","8條","8條","9條","9條","9條","9條")
+mahjonge <- list(Strip)
+mahjonge
+```
+f.1餅到9餅各4顆   
+```{r}
+Pie <- c("1餅","1餅","1餅","1餅","2餅","2餅","2餅","2餅","3餅","3餅","3餅","3餅","4餅","4餅","4餅","4餅","5餅","5餅","5餅","5餅","6餅","6餅","6餅","6餅","7餅","7餅","7餅","7餅","8餅","8餅","8餅","8餅","9餅","9餅","9餅","9餅")
+mahjongf <- list(Pie)
+mahjongf
+```
+
+2.建立一個串列A，這個串列包含3個元素    
+  year：字串    
+  city：字串    
+  friend：5 筆姓名字串向量資料    
+  最後使用2種方法列出，friend字串向量中第2個人的名字    
+```{r}
+Year <- "2017"
+City <- "Taoyuan"
+Friend <- c("Allen","Bunny","Cindy","Dennie","Ellen")
+A <- list(year=Year,city=City,friend=Friend)
+A[[3]][2] 
+A[["friend"]][2]
+```
+3.請分別使用A[].A[1].A[2].A[[1]].A[[2]]和A$year傳回物件的內容
+```{r}
+A[]
+A[1]
+A[2]
+A[[1]]
+A[[2]]
+A$year
+```
+4.使用負索引，只傳回city和friend元素
+```{r}
+A[-1]
+```
+5.將串列的city欄位內容改成LA
+```{r}
+A["city"] <- "LA" 
+A[]
+```
+6.為串列增加新元素，此元素有3筆資料   
+```{r}
+A[["AGE"]]<- c(21,20,19,32,29)
+A[]
+```

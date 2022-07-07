@@ -1,0 +1,137 @@
+---
+title: "Ch18Practice"
+author: "Justine"
+date: "2021/7/3"
+output:
+  html_document:    
+    toc: yes    
+    toc_depth: 3
+    toc_float:    
+      collapsed: no   
+      smooth_scroll: yes  
+---
+# [Home](Home.html)   
+
+### 是非題        
+1.(O)barplot()與pie()兩個函數主要是用來繪製類別資料統計圖        
+2.(X)dotchart()與plot()兩個函數主要是用來繪製類別資料統計圖        
+3.(O)設定函數barplot()的參數horiz=TRUE將會繪製水平式的長條圖        
+4.(X)如果想要在單張頁面放置多張圖片，必須使用參數mfrow       
+5.(O)如果想要設定在一張頁面有2列3欄共六張圖，可以用指令設定如下：        
+    > par(mfrow=c(2,3))   
+    
+6.(O)Plot主要是繪製兩數量變數的散佈圖(scatter plot)，可以從中觀察出兩數值變數間的線性相關的性質     
+    當然plot也被用來繪製table、factor以及timeSeries等物件的繪圖，只是不同的物件時所定義出來的圖形也會有所不同   
+7.(X)Plot僅用來繪製兩數量變數的散佈圖(scatter plot)，       
+    可以從中觀察出兩數值變數間的線性相關的性質，並無法使用來對應類別變數，繪製出箱型圖        
+8.(O)直方圖的R基本預設指令為hist(x)        
+9.(X)箱型圖的R基本預設指令為plot(x)       
+10.(O)x與y散佈圖(scatter plot)的R指令為plot(x, y)        
+11.(O)箱型圖的R基本預設指令為boxplot(x)       
+12.(X)莖葉圖的R基本預設指令為stemplot(x)        
+13.(O)長條圖的R基本預設指令為barplot(x)       
+14.(O)莖葉圖的R基本預設指令為stem(x)        
+
+---   
+
+### 選擇題    
+1.(C)以下哪一個函數主要是用來繪製類別資料統計圖?        
+    (A)boxplot() (B)dotchart() (C)barplot() (D)hist()       
+2.(A)以下哪一個函數主要是用來繪製數值資料統計圖?        
+    (A)boxplot() (B)pie() (C)barplot() (D)points()        
+3.(D)以下哪一種類型的統計圖是plot()函數無法達成的?        
+    (A)成對的散佈圖 (B)時間序列圖       
+    (C)箱型比較圖   (D)所列三種都可以達成       
+4.(D)當以下的指令被執行後，我們可以得到何種的統計圖形?        
+    > plot(as.factor(x))      
+    (A)散佈圖 (B)時間序列圖 (C)箱型圖 (D)長條圖   
+    
+5.(D)使用哪一個函數可以建立一個最簡單的線性模型?        
+    (A)abline() (B)anova() (C)lines() (D)lm()       
+8.(B)何組R指令會產生以下圖型?       
+(A)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+```
+(B)
+    ```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+title(main = "title")
+```
+(C)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+title(sub = "title")
+```
+(D)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+title(xlab = "title")
+```
+    
+9.(B)何組R指令會產生以下圖型？        
+(A)
+```{r}
+boxplot(x)
+boxplot(y)
+par(mfrow=c(1,2))
+```
+(B)
+```{r}
+par(mfrow=c(1,2))
+boxplot(x)
+boxplot(y)
+```
+(C)
+```{r}
+par(mfrow=c(boxplot(x),boxplot(y)))
+```
+(D)以上皆非      
+
+10.(B)以下R指令結果為?   
+```{r}
+x=c(1:5,3:7,1:6)
+hist(x)
+```
+
+---   
+
+### 複選題        
+1.(BC)以下哪些函數是用來繪製類別資料統計圖?       
+    (A)hist() (B)pie() (C)barplot() (D)dotplot() (E)stem()        
+2.(ADE)以下哪些函數是用來繪製數值資料統計圖?        
+    (A)hist() (B)pie() (C)barplot() (D)dotplot() (E)stem()        
+    
+---   
+
+### 實作題        
+1.下載軟體包MASS並使用其中的數據框Cars93在1993年銷售部93汽車資料        
+  將其中的汽車類別變數Type轉換成為table變數並使用mfcol=c(1,2)繪圖參數設定在單張頁面中並排繪製一張直條圖(barplot)與另一張圓餅圖(pie)  
+```{r}
+#install.packages("MASS")
+library(MASS)
+car.table <- table(Cars93$Type)
+barplot(car.table,main = "汽車型態的次數分配直條圖")
+pie(car.table,main = "汽車型態的次數分配圓餅圖")
+```
+
+2.下載軟體包MASS並使用其中的數據框Cars93在1993年銷售部93汽車資料        
+  使用兩個耗油量數值變數MPG.city與MPG.highway繪製散佈圖，並加上迴歸線與加註標題       
+```{r}
+#install.packages("MASS")
+library(MASS)
+car <- data.frame(Cars93$MPG.city,Cars93$MPG.highway)
+model <- lm(Cars93.MPG.city~Cars93.MPG.highway,data = car)
+model.value <- fitted(model)
+plot(car,main = "市區與公路耗油迴歸與散布圖")
+abline(model) 
+```
+

@@ -1,0 +1,175 @@
+---
+title: "wk02_0304_"
+author: "Justine"
+date: "2021/3/4"
+output: 
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes    
+---       
+## [Home](Home.html)        
+
+## inclass        
+- google [google](https://www.google.com/?hl=zh_tw)
+
+* adobe
+  - <font color='#F50109' size=3>red</font>
+  - <font color='#FF5F00' size=5>orange</font>
+  - <font color='#F5F300' size=8>yellow</font>
+  
++ cat
+
+  1.cat1 ![missing](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0U2Vs4WsBfbFryuMs9NidutDwjqzaauLKSg&usqp=CAU)
+ 
+  2.cat2
+<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcC6GSN5rwOb45x9xLcspIcv0XXazy_5KjDQ&usqp=CAU' width=250></img>
+
+  3.
+  <pre>連假放完，年算過了。 
+昨天去球館。與一位68歲牙醫球友聊天。他仍在工作，最近才換了執業執照(打算繼續幹)。
+他樂善好施，兢兢業業，看起來生活充滿樂趣。時常在群組po旅遊照片。他的天空，陽光普照，單純的湛藍。
+我則有點提不起勁 。又老了一歲。 
+身體的折磨告訴我 ，世界末日真的存在 ， 太陽會燒完自己 ，這一切終將消失。我還要在這樣的意識下繼續工作多久？
+</pre>
+
+---
+
+### arithmetic
++-*/    
+%%餘數    
+%/%商數  
+**    
+
+```{r}
+1+2
+3-4
+5*6
+7/8
+7%%8
+2^10
+```
+
+
+### function
+```{r}
+abs(-456)
+abs(56)
+round(23.45,1)
+floor(23.45)
+ceiling(23.45)
+```
+
+> block quote  
+* unordered list  
+* item 2   
+ + sub-item 1  
+ + sub-item 2 
+
+1. ordered list
+2. item 2 
+ + sub-item 1
+ + sub-item 2
+ 
+  Table Header | Second Header
+ ------------- | -------------
+    Table Cell | Cell 2
+        Cell 3 | Cell 4 
+        
+---
+
+## afterclass
+
+## <font color='#0110F5' size=5>是非題</font>
+(X)1.R studio的Console視窗主要是編輯R語言程式碼,儲存,最後再執行的視窗  
+(X)3.在Workspace視窗,如果選Environment標籤,可以在此看到Console視窗所有執行指令的紀錄    
+(O)5.下列3個指令的執行結果是一樣的   
+      >x=10或>x<-10或>10->x 
+
+## <font color='#0110F5' size=5>選擇題</font>      
+(C)1.下列哪一個符號是程式註解符號?   
+      (A)%  (B)@  (C)#  (D)-    
+(C)3.可以在哪一個視窗看到所有變數名稱和它的內容?
+      (A)Console視窗    (B)Source editor視窗     
+      (C)Workspace視窗  (D)Files/Plots視窗    
+(A)5.哪一個函數可以在Console視窗列出所有變數資料?   
+      (A)ls() (B)rm() (C)q() (D)getwd()   
+
+---
+
+## selfpractice
+
+## <font color='#0110F5' size=5>是非題</font>      
+(O)2.R語言有支援直譯器(Interpretor),可以在Console視窗直接輸入指令,同時獲得執行結果   
+(O)4.一個完整的R程式,即使在Source editor區編輯,其執行的非圖形資料結果,將是在Console視窗中顯示
+
+## <font color='#0110F5' size=5>選擇題</font>   
+(A)2.如果我們想使用R語言的直譯功能,可以在下列哪一個視窗輸入指令?    
+    (A)Console視窗   (B)Source editor視窗   
+    (C)Workspace視窗 (D)Files/Plots視窗    
+(D)4.下列哪一個符號不是R語言的等待符號?        
+    (A)= (B)<- (C)-> (D)#   
+(B)6.哪一個函數可以保存整個Workspace,同時將它保存在系統預設的".RData"檔案內    
+    (A)save() (B)save.image() (C)load() (D)savehistory()    
+
+## <font color='#0110F5' size=5>複選題</font>    
+(BD)1.哪幾個函數可以保存Console視窗執行過的指令   
+    (A)save()  (B)save.image()           
+    (C)load()  (D)savehistory()  (E)getwd()   
+    
+## <font color='#0110F5' size=5>實作題</font>     
+1.請研究R Studio視窗右上角的Workspace視窗,說明下列標籤的功能:      
+  a.Environment:用來記載目前變數的數值,方便查看目前變數的狀況    
+  b.History:所有在Console執行過程式碼的歷史記錄   
+  c.To Console:執行程式碼   
+  d.To Source:載入編寫的函数    
+2.請研究R Studio視窗右下角的Files/Plots視窗,說明下列標籤的功能:    
+  a.Files:
+  b.Export:
+
+```{r}
+5**2  
+5^3
+9**(1/2)
+125**(1/3)
+9%%7
+9%/%7
+``` 
+```{r}
+abs(-100)
+round(47.85)
+round(47.85,1)
+floor(-100.297)
+ceiling(-100.297)
+```
+- R [R官方](https://www.r-project.org/)  
+
+- R標誌  
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/1200px-R_logo.svg.png' width=120></img>  
+
+---
+
+### 上課筆記 
+Tools->Global option->UTF-8      
+設定->Preview in view pane->viewer       
+img src='網址' /img  
+size=字體大小 width=圖片大小    
+font color='色號' /font   
+abs()絕對值    
+round(number,小數點後幾位)    
+round()四捨五入   
+floor()小於等於最近整數(無條件捨去)   
+ceiling()大於等於最近整數(無條件進位)
+表格:線要對齊
+
+### 補充筆記  
+ls()顯示當前已有的所有變量
+rm()刪除相應物件
+head()檢視相應物件
+getwd()回傳目前的工作路徑
+setwd()指定工作路徑
+q()離開
+save(物件名稱, file="檔名.rdata")
+load("檔名.rdata")載入檔案

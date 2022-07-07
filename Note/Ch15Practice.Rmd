@@ -1,0 +1,175 @@
+---
+title: "Ch15Practice"
+author: "Justine"
+date: "2021/7/3"
+output:
+  html_document:    
+    toc: yes    
+    toc_depth: 3
+    toc_float:    
+      collapsed: no   
+      smooth_scroll: yes  
+---
+# [Home](Home.html)   
+
+### 是非題        
+1.(O)使用sample()函數執行隨機抽樣時，參數replace如果是TRUE，代表抽完一個樣本這個樣本需放回去，供下次抽取        
+2.(X)seed()函數的參數可以是一個數字，當設定種子值後，在相同種子值後面的sample()所產生的隨機數序列將相同        
+3.(X)如果在取樣時，希望某些樣本有較高的機率被採用，可更改權重(weights)，下列指令將造成，"1"出現機率最高       
+    > sample(1:6,12,replace = TRUE,c(3,1,1,1,2,4))    
+    
+```{r}
+sample(1:6,12,replace = TRUE,c(3,1,1,1,2,4))
+```
+    
+4.(O)下列指令是擷取islands物件中，排除索引為21至48的資料     
+    > islands[-(21:48)]   
+    
+```{r}
+islands[-(21:48)]  
+```
+    
+5.(X)iris物件是一個數據框資料，如下：    
+    > str(iris)   
+    使用下列方式擷取資料時，將造成x物件是向量資料     
+    > x <- iris[,"Petal.Length",drop = FALSE]   
+    
+```{r}
+str(iris)  
+x <- iris[,"Petal.Length",drop = FALSE] 
+```
+    
+6.(O)identical()這個函數基本用法是測試2個物件是否完全相同，如果完全相同將傳回TRUE，否則傳回FALSE       
+7.(X)有了with()它在欄位運算時可以省略物件名稱和"$"符號，此函數另外用在欄位運算時，可將運算結果放在相同物件新建欄位上        
+8.(O)假設merge()函數使用如下：   
+    > merge(A,B)       
+    由上述指令可判斷它是交集(AND)的合併     
+    
+9.(O)假設merge()函數使用如下：   
+    > merge(A,B,all = TRUE)     
+    由上述指領可判斷它是聯集(OR)的合併    
+    
+10.(O)有時候我們可能會想要將部分欄位在排序時使用遞增排序，部分欄位使用遞減排序，此時可以使用xtfrm()函數            
+
+---   
+
+### 選擇題      
+1.(C)%in%功能類似於哪一個函數?       
+    (A)within() (B)identical() (C)match() (D)merge()        
+2.(A)一個排序函數，這個函數將傳回每一筆元素在所排序列的位置        
+    (A)order() (B)sort() (C)rev() (D)rank()        
+3.(D)下列哪一個sample()函數在設計時，對出現5的權種設計最高?        
+    (A)> sample(1:6,12,replace = TRUE,c(6,1,1,1,2,4))       
+    (B)> sample(1:6,12)         
+    (C)> sample(1:6,12,replace = TRUE)        
+    (D)> sample(1:6,12,replace = TRUE,c(1,2,3,4,5,1))         
+    
+```{r}
+sample(1:6,12,replace = TRUE,c(6,1,1,1,2,4))   
+#sample(1:6,12)
+sample(1:6,12,replace = TRUE) 
+sample(1:6,12,replace = TRUE,c(1,2,3,4,5,1))
+```
+    
+4.(A)有指令如下，其執行結果為何？        
+    > duplicated(c(1,1,1,2,2))    
+    (A)[1] FALSE  TRUE  TRUE FALSE  TRUE    
+    (B)[1] FALSE  TRUE  FALSE TRUE  TRUE    
+    (C)[1] FALSE  TRUE  TRUE TRUE  TRUE    
+    (D)[1] FALSE  FALSE  TRUE TRUE  TRUE    
+    
+```{r}
+duplicated(c(1,1,1,2,2))
+```
+    
+5.(C)有指令如下，其執行結果為何？        
+    > which(duplicated(c(1,1,1,2,2)))   
+    (A)[1] 3 4 5        
+    (B)[1] 3 4        
+    (C)[1] 2 3 5       
+    (D)[1] 2 4    
+    
+```{r}
+which(duplicated(c(1,1,1,2,2))) 
+```
+    
+6.(A)下列哪一個函數可以將數據等量切割?       
+    (A)cut() (B)melt() (C)decast() (D)table()       
+7.(C)使用merge()函數時若加哪個參數代表，所有x物件資料均在這個合併結果內，在合併結果原屬於y物件的欄位，如果原先欄位不存在的資料將以NA值填充?        
+    (A)all.x = FALSE (B)all.y = FALSE       
+    (C)all.x = TRUE  (D)all.y = TRUE        
+8.(B)將寬格式（wide format）數據轉成長格式(long format)數據稱融化可以使用哪一個函數?       
+    (A)match() (B)melt() (C)dcast() (D)aggregate()        
+
+---
+
+### 複選題        
+1.(AD)一個iris物件，其前6筆資料如下:    
+```{r}
+head(iris) 
+```    
+    下列哪些程式片段可以刪除重複資料，並將結果存在x物件?       
+    (A)> i <- which(duplicated(iris))       
+       > x <- iris[-i, ]    
+    (B)> i <- which(duplicated(iris))       
+       > x <- i[-iris, ]     
+    (C)> x <- iris[duplicated(iris), ]     
+    (D)> x <- iris[!duplicated(iris), ]       
+    (E)> x <- iris[ ,!duplicated(iris)]     
+
+```{r}
+i <- which(duplicated(iris))       
+x1 <- iris[-i, ]
+
+i <- which(duplicated(iris))       
+#x2 <- i[-iris, ] 
+
+x3 <- iris[duplicated(iris), ]    
+
+x4 <- iris[!duplicated(iris), ]  
+
+#x5 <- iris[ ,!duplicated(iris)]
+```
+    
+2.(BC)有一個airquality物件，其前6筆資料如下:       
+    ```{r}
+head(airquality) 
+```  
+    下列哪些程式片段可以刪除含NA的資料，並將結果存在x物件?        
+    (A)> x <- airquality[ ,complete.cases(airquality)]                
+    (B)> x <- airquality[complete.cases(airquality), ]        
+    (C)> x <- na.omit(airquality)       
+    (D)> x <- airquality(na.omit)     
+    (E)> x <- na.omit(complete.cases(airquality))       
+    
+```{r}
+#x6 <- airquality[ ,complete.cases(airquality)]                
+x7 <- airquality[complete.cases(airquality), ]        
+x8 <- na.omit(airquality)    
+#x9 <- airquality(na.omit)     
+x10 <- na.omit(complete.cases(airquality))
+```
+    
+---       
+
+### 補充筆記        
+sample(範圍,數量,replace,權重):隨機抽樣(replace:True取後放回,False取後不放回)       
+set.seed():種子值       
+duplicated():搜尋是否有重複值       
+which():傳回重複值索引        
+complete.cases():檢驗資料完整性(資料完整回傳True,資料有NA值回傳False)              
+na.omit():去除NA值        
+with(物件,運算公式):數據框運算    
+identical():測試資料是否完全相同    
+within():數據框運算(結果放入新建欄位中)       
+cut():等量分割數據    
+rbind():增加列    
+cbind():增加欄        
+match():交集,返回與物件相同長度的向量               
+%in%:返回與物件相同長度的向量   
+sort():排序       
+order():傳回位置    
+aggregate():回傳向量/矩陣/陣列        
+melt():寬->長       
+dcast():長->寬        
+merge(物件,物件,all):物件合併(all:True聯集,False交集)       

@@ -1,0 +1,599 @@
+---
+title: "wk13_0520_"
+author: "Justine"
+date: "2021/5/20"
+output:
+  html_document:    
+    toc: yes    
+    toc_depth: 3
+    toc_float:    
+      collapsed: no   
+      smooth_scroll: yes 
+---
+
+# [Home](Home.html)   
+
+# inclass              
+```{r}
+# 00
+#installed.packages()
+#install.packages("MASS")
+```
+
+```{r}
+library(MASS)
+str(crabs)
+head(crabs)
+```
+
+```{r}
+#ch16_1
+state.popu <- state.x77[,1] #取得人口數資料
+head(state.popu) # 驗證人口數資料
+names(state.popu) <- NULL #刪除向量元素名稱
+head(state.popu) #驗證結果
+```
+
+```{r}
+#ch16_2
+stateUSA <- data.frame(state.name, state.popu, state.area, state.region) 
+head(stateUSA)
+```
+
+```{r}
+#ch16_3
+names(stateUSA)<- c("name","popu","area","region") #將數據框的欄位名稱分別簡化為"name","popu","area","region"
+head(stateUSA) #驗證結果
+str(stateUSA)
+```
+
+```{r}
+#ch16_4
+mycar <- mtcars[c(1,2,9,10)] 
+head(mycar)
+```
+
+```{r}
+#ch16_5
+mycar$am <- factor(mycar$am, labels=c("Auto","Manual")) #將mycar物件的am欄位的向量改成因子，同時0表示自排，1表示手排
+str(mycar)
+head(mycar) #驗證結果
+```
+
+```{r}
+#ch16_6
+sapply(mycar, function(x) length(unique(x)))
+```
+
+```{r}
+#ch16_7
+mean(crabs$CW) #使用crabs物件計算澳洲螃蟹甲殼寬度平均值
+```
+
+```{r}
+#ch16_8
+mean(mycar$mpg)
+
+#ch16_9
+mean(stateUSA$popu) #使用stateUSA物件計算美國每周平均人口數
+x <- c(100, 7, 12, 6)
+median(x) #獲得平均數
+x <- c(100, 7, 8, 9, 10)
+median(x) #獲得平均數
+```
+
+```{r}
+#ch16_10
+mean(mycar$gear)
+median(mycar$gear)
+```
+
+```{r}
+#ch16_11
+median(crabs$CW) #獲得平均數
+```
+
+```{r}
+#ch16_12
+median(stateUSA$popu)
+```
+
+```{r}
+#ch16_13
+sd(crabs$BD) #獲得標準差
+```
+
+```{r}
+#ch16_14
+var(crabs$BD)
+```
+
+```{r}
+#ch16_15
+sd(mycar$mpg) #獲得標準差
+```
+
+```{r}
+#ch16_16
+var(mycar$mpg)
+```
+
+```{r}
+#ch16_17
+range(crabs$CW)#列出crabs物件螃蟹甲殼寬度的範圍
+```
+
+```{r}
+#ch16_18
+range(stateUSA$popu)
+```
+
+```{r}
+#ch16_19
+range(mycar$mpg)#列出mycar物件每加侖行駛的距離範圍
+```
+
+```{r}
+# 20 to 25
+x <- c(1,3,5,11,23,33,66,99)
+quantile(x)
+```
+
+```{r}
+#ch16_20
+quantile(stateUSA$popu)
+```
+
+```{r}
+#ch16_21
+quantile(crabs$CW) #計算crabs物件螃蟹甲殼寬度的四分衛數
+```
+
+```{r}
+#ch16_22
+quantile(mycar$mpg)
+```
+
+```{r}
+#ch16_23
+quantile(crabs$CW,probs=c(0.1, 0.9)) #計算crabs物件螃蟹甲殼寬度10%和90%的值
+```
+
+```{r}
+#ch16_24
+quantile(stateUSA$popu,probs=c(0.1,0.9))
+```
+
+```{r}
+#ch16_25
+quantile(mycar$mpg,0.1)#計算mycar物件每加侖行駛距離10%的值
+```
+
+```{r}
+#ch16_26 to 36  
+#ch16_25
+table(stateUSA$region)  
+```
+
+```{r}
+#ch16_27
+table(crabs$sex)#使用crabs，計算澳洲螃蟹供貨母的實際性別數量
+```
+
+```{r}
+#ch16_28
+table(mycar$am)
+
+regioninfo <- table(stateUSA$region)
+regioninfo
+class(regioninfo)
+```
+
+```{r}
+#ch16_29
+regioninfo / sum(regioninfo)#計算美國各區實際週數的占比
+```
+
+```{r}
+#ch16_30
+crabsinfo <- table(crabs$sex)
+crabsinfo / sum(crabsinfo)
+```
+
+```{r}
+#ch16_31
+carinfo <- table(mycar$am)#計算自排汗手排的占比
+carinfo / sum(carinfo)
+```
+
+```{r}
+#ch16_32
+index <- regioninfo == max(regioninfo)
+index
+names(regioninfo[index])
+```
+
+```{r}
+#ch16_32_1
+index <- carinfo == max(carinfo)
+index
+names(carinfo)[index]
+```
+
+```{r}
+
+#ch16_33
+
+crabsinfo <- table(crabs$sex)
+index <- crabsinfo == max(crabsinfo)
+index
+names(crabsinfo[index]) #計算眾數
+```
+
+```{r}
+#ch16_34
+which.max(regioninfo)
+```
+
+```{r}
+#ch16_35
+which.max(carinfo)#計算眾數
+```
+
+```{r}
+#ch16_36
+which.max(crabsinfo)
+```
+
+```{r}
+#ch16_37
+hist(stateUSA$popu, col="Green")#繪製直方圖
+```
+
+```{r}
+#ch16_38
+hist(crabs$CW, col="Gray", main="Histogram of Crab", 
+     xlab="Carapace width", ylab="Counter")
+```
+
+```{r}
+#ch16_39
+hist(mycar$mpg, col="Yellow", main="Histogram of MPG",
+     xlab="Mile per Gallon")#繪製直方圖，用黃色
+```
+
+```{r}
+#ch16_40
+hist(mycar$mpg, col="Yellow", main="Histogram of MPG",
+     xlab="Mile per Gallon", breaks=3)
+```
+
+```{r}
+#ch16_41
+hist(crabs$CW, col="Gray", main="Histogram of Crab", xlab="Carapace width",
+     ylab="Counter",breaks=c(15,25,35,45,55))#繪製直方圖，用灰色，且柱狀區間為15-25 25-35 35-45 45-55
+
+```
+
+```{r}
+#ch16_42
+dencrabs <- density(crabs$CW)
+str(dencrabs)
+plot(dencrabs)
+```
+
+```{r}
+#ch16_43
+dencars <- density(mycar$mpg)#建立密度圖
+plot(dencars, main="Miles per Gallon")
+```
+
+```{r}
+#ch16_44
+hist(crabs$CW, freq=FALSE)
+dencrabs <- density(crabs$CW)
+lines(dencrabs)#建立直方圖，再加上密度圖
+```
+
+```{r}
+#ch16_45
+summary(mycar)#解釋物件
+```
+
+```{r}
+#ch16_46
+summary(stateUSA)#使用函數瞭解物件
+```
+
+```{r}
+#ch16_47
+mycar$cyl <- as.factor(mycar$cyl)
+mycar$gear <- as.factor(mycar$gear)
+summary(mycar)#將物件裡的變數轉換為因子
+```
+
+```{r}
+#ch16_48
+boxplot(mpg ~ cyl, data=mycar)#繪製箱形圖
+```
+
+```{r}
+#ch16_49
+boxplot(mpg ~ am, data=mycar, main="am vs mpg", col="Yellow")#繪製箱型圖，對比前一題，加了名字與改變圖形顏色
+```
+
+```{r}
+#ch16_50
+boxplot(mpg ~ gear, data=mycar, main="gear vs mpg", col="Blue")#應用邏輯同上
+```
+
+```{r}
+#ch16_51
+boxplot(popu ~ region, data=stateUSA,
+        main="Region vs Population", col="Green")#應用邏輯同上
+```
+
+```{r}
+#ch16_52
+boxplot(popu ~ region, data=stateUSA,
+        main="Region vs Population", col="Green", range=0)#應用邏輯同上，只是將range = 0，以區段直接顯示最大值
+
+names(iris)
+```
+
+```{r}
+#ch16_53
+cor(iris$Sepal.Length, iris$Sepal.Width)#做關聯性分析
+```
+
+```{r}
+#ch16_54
+cor(iris$Petal.Length, iris$Petal.Width)#做關聯性分析
+```
+
+```{r}
+#ch16_55
+cor(iris[-5])#相關係數矩陣，把第五行去掉
+```
+
+```{r}
+#ch16_56
+plot(iris[-5])#相關係數散點圖，把第五行去掉
+pairs(iris[-5])#與上題結果一致，因傳入參數皆為數據框
+```
+
+```{r}
+#ch16_57
+names(stateUSA)
+cor(stateUSA$popu, stateUSA$area)#做關聯性分析
+```
+
+```{r}
+#ch16_58
+plot(stateUSA[2:3])#抓出第二、三行做相關係數散點圖
+```
+
+```{r}
+#ch16_59
+names(crabs)
+cor(crabs[4:8])#抓出第四~第八行做相關係數矩陣
+```
+
+```{r}
+#ch16_60
+mycartable <- with(mycar, table(am, gear))#建立組合表格查看各種可能組合
+mycartable
+```
+
+```{r}
+#ch16_61
+myresearch <- matrix(c(20, 72, 80, 28),ncol=2)
+rownames(myresearch) <- c("No.Smoking", "Smoking")
+colnames(myresearch) <- c("Lung.cancer","Health")#將數據轉換成矩陣
+myresearch
+```
+
+```{r}
+#ch16_62
+mytable <- as.table(myresearch)#將矩陣轉成表格資料
+class(mytable)
+
+str(myresearch)
+str(mytable)
+#比較上兩者資料之差異
+```
+
+```{r}
+#ch16_63
+mytable["Smoking","Lung.cancer"]#查看數據
+```
+
+```{r}
+#ch16_64
+mytable["No.Smoking","Health"]#查看數據
+
+```
+
+```{r}
+#ch16_65
+myresearch.df <- as.data.frame(myresearch)#將矩陣物件轉為數據框
+str(myresearch.df)
+```
+
+```{r}
+#ch16_66
+mytable.df <- as.data.frame(mytable)#將表格物件轉為數據框
+str(mytable.df)
+```
+
+
+```{r}
+#ch16_67
+addmargins(mytable, margin=2)#計算列邊際加總
+```
+
+```{r}
+#ch16_68
+addmargins(mytable, margin=1)#計算行邊際加總
+```
+
+```{r}
+#ch16_69
+addmargins(mytable)#計算行與列邊際加總
+```
+
+```{r}
+#ch16_70
+prop.table(mytable)#計算行與列數據占比
+```
+
+```{r}
+#ch16_71
+prop.table(mytable, margin=1)#計算行數據占比
+
+prop.table(mytable, margin=2)#計算列數據占比
+```       
+
+---                    
+
+# afterclass        
+<pre>
+【Open Data】
+蔣宗哲老師 - 自行車竊案分析   ex : https://data.taipei/#/  【台北市資料大平台】
+ 對多欄位資料集以指定欄位的指定條件進行統計
+例如:
+對台北市自行車竊案資料及計算10月份的竊案總數 (或年分, 或月份, 或時刻)
+對多欄位資料集以指定欄為分群進行統計, 所有區域的竊案數
+例如:
+對台北市自行車竊案資料集計算各地區的竊案總數
+描繪統計圖表
+折線圖 : 各地區每小時竊案累積數
+散佈圖 : 月份vs. 時刻累計竊案數
+長條圖 : 各地區竊案累積總數
+</pre>
+### <b> 大台北自行車竊案</b>
+
+#### <font color=green><b>目的</b></font> :
+
+1. 查詢特定年份、月份、時刻的竊案總數
+2. 所有區域的竊案數
+3. 每個地區每一時刻的竊案總數
+4. 各地區每小時竊案累積數 (統計圖)
+5. 月份 vs. 時刻累計竊案數 (統計圖)
+
+```{r}
+## 01 下載自行車竊案csv
+## 02 準備 input : b.theft
+library(foreign)
+csvpath <- file.path("bikeTheft.csv")
+b.theft <- read.csv(csvpath,sep=",",na="-")
+```
+
+```{r}
+class(b.theft)   #檢視input 類別
+str(b.theft)     #檢視input 結構
+length(b.theft[,1])  #檢視input 資料筆數
+colnames(b.theft)    #檢視input 資料欄位
+```
+
+## 欲分析題目vs data類型現狀
+1. 查詢特定年份、月份、時刻的竊案總數  ==> 發生日期整理成date 資料類型,方便用日期函數. 當然也可以substr來拆解年月日
+2. 所有區域的竊案數                    ==> 發生地點解析: 如何擷取出來"區"
+3. 每個地區每一時刻的竊案總數          ==> 發生時段解析: 比較bikeTheft2.csv 與 bikeTheft2----.csv 之資料內容 ; 建立完整因子
+4. 各地區每小時竊案累積數 (統計圖)
+5. 月份 vs. 時刻累計竊案數 (統計圖)
+
+```{r}
+## 03 預處理
+yr <- substr(b.theft$"發生日期",1,3)
+mo <- substr(b.theft$"發生日期",4,5)
+dy <- substr(b.theft$"發生日期",6,7)
+area <- factor(substr(b.theft$"發生地點",4,6))
+
+## 04 資料清理 : 釐清發生時段的完整性,正確性,重複性.... 說明取捨與處理與解釋
+s <- sort(unique(b.theft$"發生時段"))      # ' 06-09' 整理 '06-09'
+str(b.theft[,"發生時段"])
+str(b.theft)
+b.theft[,"發生時段"]<- factor(b.theft[,"發生時段"], labels = 1:24)
+b.theft <- cbind(b.theft, yr, mo, dy, area)
+
+```
+
+```{r}
+## 05 彙整分析的資料集 (input)
+colnames(b.theft)<- c("no", "type", "date", "period", "address", "yr", "mo", "dy", "area")
+```
+
+```{r}
+## 1. 查詢特定年份、月份、時刻的竊案總數
+yr_n <- table(b.theft[,"yr"])
+mo_n <- table(b.theft[,"mo"])
+prd_n <- table(b.theft[,"period"])    #需要更深入討論資料內容,如何處理或解釋
+area_n <- table(b.theft[,"area"])
+```
+
+```{r}
+## 2. 所有區域的竊案數 
+barplot(head(sort(area_n),8))
+period_n <- table(b.theft[,"period"])
+barplot(period_n , horiz = F, col = "violetred")
+```
+
+```{r}
+## 3. 每個地區每一時刻的竊案總數   
+## my.b.theft <- with(b.theft, table(area,發生時段))  ##欄名稱不要用中文
+area_period <- with(b.theft, table(area,period))
+```
+
+```{r}
+## 4. 各地區每小時竊案累積數 (統計圖)
+hist(area_n, col="Green",main="區域的竊案數", xlab="竊案數", ylab = "區數") # 每區竊案數直方圖
+
+barplot(head(sort(area_n, decreasing = T),8), width=0.1, space=0.1, main = "xxx", horiz=F )  # 每區竊案數直條圖
+
+str(area_period )
+head(area_period )
+```
+
+```{r}
+## 5. 月份 vs. 時刻累計竊案數 (統計圖)
+
+mo_period <- with(b.theft, table(mo,period))
+
+colors = c("green","orange","brown","darkolivegreen1",
+           "darkslategray1","darkviolet","gold","deeppink1",
+           "yellowgreen","yellow4","yellow","yellow3")
+
+barplot(mo_period, col = colors, 
+        legend.text = sort(unique(b.theft$mo)), 
+        args.legend = list(x = "right" ), 
+        xlim = c(0,33))
+#barplot(Values, main = "total revenue", names.arg = months, xlab = "month", ylab = "revenue", col = colors)
+
+```
+
+## 網路資源
+```{r}
+## sample from https://www.tutorialspoint.com/r/r_bar_charts.htm
+## R colors from http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
+
+# Create the input vectors.
+colors = c("green","orange","brown")
+months <- c("Mar","Apr","May","Jun","Jul")
+regions <- c("East","West","North")
+
+# Create the matrix of the values.
+Values <- matrix(c(2,9,3,11,9,4,8,7,3,12,5,2,8,10,11), nrow = 3, ncol = 5, byrow = TRUE)
+
+# Give the chart file a name
+png(file = "barchart_stacked.png")
+
+# Create the bar chart
+barplot(Values, main = "total revenue", names.arg = months, xlab = "month", ylab = "revenue", col = colors)
+
+# Add the legend to the chart
+legend("topleft", regions, cex = 1.3, fill = colors)
+
+# Save the file
+#dev.off()
+```

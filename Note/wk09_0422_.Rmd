@@ -1,0 +1,382 @@
+---
+title: "wk09_0422_"
+author: "Justine"
+date: "2021/4/22"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes 
+---     
+# [Home](Home.html)  
+# inclass       
+3.統計（或自行假設）班上20 人的考試成績:        
+95,93,84,76,85,73,64,82,77,65,74,43,72,62,89,67,73,65,88,71               
+計分方式如下：
+A. 90 分( 含) 以上            
+B. 80 ~ 89            
+C. 70 ~ 79            
+D. 60 ~ 69            
+E. 60 以下        
+請將上述資料建為有序因子，排列方式為A > B > C > D > E           
+a. 請列出成績B 以上的人
+```{r}
+stat.score <- c(95,93,84,76,85,73,64,82,77,65,74,43,72,62,89,67,73,65,88,71)
+length.score <- length(stat.score)
+stat.grade <- character(length.score)
+
+for(i in 1:length.score) 
+{if (stat.score[i]>=90) stat.grade[i]<-"A" 
+  else if (stat.score[i]>=80) stat.grade[i]<-"B"
+  else if (stat.score[i]>=70) stat.grade[i]<-"C"
+  else if (stat.score[i]>=60) stat.grade[i]<-"D"
+  else stat.grade[i] <- "F"}
+
+ordered.grade <- factor(stat.grade, levels=c("F","D","C","B","A"),
+                        ordered=TRUE)
+which(ordered.grade >= "B")    #a
+which(ordered.grade == "F")    #b
+table(ordered.grade)           #c
+```
+
+```{r}
+ch14_17 <- function()
+{
+  cat("請輸入數值資料，若想結束輸入，可直接按 ENTER")
+  x1 <- scan()
+  cat(x1,"\n")
+  cat("請輸入字元資料，若想結束輸入，可直接按 ENTER")
+  x2 <- scan(what = character())
+  cat(x2)
+}
+```
+<pre>
+(001-01)
+大家總是喜歡玩猜拳遊戲，請寫一個與電腦猜拳的遊戲，(1)剪刀 < (2)石頭 < (3)布 < (1)剪刀
+使用者輸入1, 2, 3來代表，電腦輸出要是剪刀、石頭、布
+</pre>
+
+```{r}
+RPS <- c("剪刀","石頭","布")
+cat("請輸入數值資料，\n
+    輸入1, 2, 3來代表剪刀、石頭、布
+    若想結束輸入，可直接按 ENTER\n")
+x_user <- scan()
+cat("you : ", RPS[x_user], "\n")
+x_cpt <- sample(1:3,1)
+cat("computer : ", RPS[x_cpt], "\n")
+result <- x_user - x_cpt
+cat(ifelse(result == 0, "balance",
+           ifelse(result == -2, "youwin!", "you lost!")))
+```
+
+---
+
+# afterclass    
+## 第十四章實例      
+```{r}
+#ch14_1
+getwd()
+```
+
+```{r}
+#ch14_2
+#setwd("D:/RBook")
+getwd()
+```
+
+```{r}
+#ch14_3
+file.path("D:","Users", "Jiin-Kwei", "Documents")
+```
+
+```{r}
+#ch14_4
+#setwd(file.path("C:","Users", "Jiin-Kwei", "Documents"))
+getwd()
+```
+
+```{r}
+#ch14_5
+dir(path="C:/")
+```
+
+```{r}
+#ch14_6
+dir("C:/")
+```
+
+```{r}
+#ch14_7
+list.files("C:/")
+```
+
+```{r}
+#ch14_8
+list.dirs("D:/office2013")
+```
+
+```{r}
+#ch14_9
+file.exists("C:/test")
+file.exists("C:/Widows")
+file.exists("C:/M1120.log")
+```
+
+```{r}
+#ch14_10
+dir("D:/RBook")
+#file.rename("D:/RBook/tmp2-1.jpg", "D:/RBook/tmp.jpg")
+```
+
+```{r}
+#ch14_11
+#file.create("D:/RBook/sample.txt")
+dir("D:/RBook")
+```
+
+```{r}
+#ch14_12
+file.copy("D:/RBook/sample.txt","D:/RBook/nwesam.txt")
+```
+
+```{r}
+#ch14_13
+dir("D:/RBook")
+#file.remove("D:/RBook/newsam.txt")
+dir("D:/RBook")
+```
+
+```{r}
+#ch14_14.R
+ch14_14 <- function()
+{
+  cat("R Language")
+  cat("\n")
+  cat("A road to Big Data.\n")
+  x <- 10
+  y <- 20
+  cat(x, y, "\n")
+  cat(x, y, x+y, sep="  ")
+  cat("\n")
+  cat(x, y, "x+y=", x+y)
+}
+```
+
+```{r}
+#ch14_15.R
+mit.Name <- c("Kevin","Peter","Frank","Maggie")
+cat(mit.Name, "\n")
+mit.Gender <- c("M","M","M","F")
+cat(mit.Gender,"\n")
+mit.Height <- c(170, 175, 165, 168)
+cat(mit.Height,"\n")
+```
+
+```{r}
+#ch14_16.R
+#
+ch14_16 <- function()
+{
+  cat("R Language Today.", file ="~/tch14_16.txt")
+}
+```
+
+```{r}
+#ch14_17.R
+cat("請輸入數值資料，若想結束輸入，可直接按 ENTER")
+x1 <- scan()
+cat(x1,"\n")
+cat("請輸入字元資料，若想結束輸入，可直接按 ENTER")
+x2 <- scan(what = character())
+cat(x2)
+```
+
+```{r}
+#ch14_18.R
+x1 <- scan("C:/Users/ju891/OneDrive/文件/R/Note/ch14_18test1.txt")
+cat(x1, "\n")
+x2 <- scan("C:/Users/ju891/OneDrive/文件/R/Note/ch14_18test2.txt")
+cat(x2, "\n")
+x3 <- scan("C:/Users/ju891/OneDrive/文件/R/Note/ch14_18test3.txt")
+cat(x3, "\n")
+x4 <- scan("C:/Users/ju891/OneDrive/文件/R/Note/ch14_18test4.txt",sep=",")
+cat(x4, "逗號是分隔符號\n")
+x5 <- scan("C:/Users/ju891/OneDrive/文件/R/Note/ch14_18test2.txt", skip = 3)
+cat(x5, "跳過三欄\n")
+x6 <- scan("C:/Users/ju891/OneDrive/文件/R/Note/ch14_18test2.txt", skip = 2, nlines = 1)
+cat(x6, "跳2欄 僅讀1欄\n")
+```
+
+```{r}
+#ch14_19.R
+write(letters,file="", ncolumns=5)
+write(letters, file="")
+write(letters, file="C:/Users/ju891/OneDrive/文件/R/Note/ch14_19test1.txt", ncolumns=5)
+write(letters, file="C:/Users/ju891/OneDrive/文件/R/Note/ch14_19test2.txt")
+x1 <- 1:10
+write(x1, "", ncolumn= 4, sep=",")
+x2 <- matrix(1:10, nrow=2)
+write(x2, file="", ncolumns=5)
+```
+
+```{r}
+#ch14_20
+ch14_20 <- function()
+{
+  x <- readClipboard()
+  print(x)
+}
+```
+
+```{r}
+#ch14_21.R
+ch14_21 <- function()
+{
+  x <- read.table(file="C:/Users/ju891/OneDrive/文件/R/Note/reportdelim.txt", sep="\t",header=TRUE)
+  print(x)
+}
+```
+
+```{r}
+#ch14_22  OLD Method
+#installed.packages("XLConnect")
+#library("XLConnect")
+#excelch14 <- file.path("c:/users/mcu/onedrive/r book/ch14/範例1.xlsx")
+#excelresult <- readWorksheetFromFile(excelch14,sheet="table2")
+```
+
+```{r}
+#ch14_23
+#excelcsv <- file.path("c:/users/mcu/onedrive/r book/ch14/ch14_23.csv")
+excelcsv <- file.path("C:/Users/ju891/OneDrive/文件/R/Note/reportcsv.csv")
+xcsv <- read.csv(excelcsv,sep=",")
+xcsv
+```
+
+```{r}
+#ch14_24
+#exceldelim <- file.path("c:/users/mcu/onedrive/r book/ch14/reportdelim.txt")
+#xdelim <- read.delim(exceldelim,sep="\t")
+#xdelim <- read.delim("C:/Users/mcuuser/Downloads/ch14/ex14_5tab.txt",sep="\t")
+#xdelim
+#ch14_25
+#xdelim
+#writeClipboard(names(xdelim))
+```
+
+```{r}
+#ch14_26.R
+#write.table(xdelim,file="~/out14_26.txt",sep="\t", row.names=FALSE)
+```
+
+```{r}
+#ch14_27.R
+library(foreign)
+#write.foreign(xcsv,"~/df14sas.txt","~/df14.sas",package="SAS")
+#file.show("~/df14sas.txt")
+```
+
+```{r}
+#ch14_28.R
+#
+library(foreign)
+#write.foreign(xcsv,"~/df14spss.sav","~/df14.sps", package="SPSS")
+#file.show("~/df14spss.sav")
+#file.show("~/df14.sps")
+```
+
+```{r}
+#ch14_29.R
+#讀取SPSS資料集檔案"df14SPSS.sav"，產生數據框
+#my.frame <- read.spss("C:/Users/herbt/OneDrive/桌面/R  PPT/ch14/CH14SAS_SPSS/df14SPSS.sav",use.value.labels = TRUE, to.data.frame = T)
+```
+
+```{r}
+#ch14_30.R
+#定義SAS執行程式的參照目錄
+sashome <- "C:/Program Files/SASHome/SASFoundation/9.4"
+#使用read.ssd將SAS永久資料集轉換讀入R程式中
+#sasxp <- read.ssd("C:/Users/herbt/OneDrive/桌面/R  PPT/ch14/CH14SAS_SPSS", "df14sas",sascmd = file.path(sashome, "sas.exe"))
+```
+
+## 第十四章是非題       
+1.(X)file.path( ) 函數可以更改目前工作目錄        
+3.(X)cat( )函數主要是做資料輸出，特別是輸出數據框時非常好用       
+5.(O)有一指令如下：        
+    write(letters, file = "")       
+    下列是其執行結果輸出的前5列：       
+    a   
+    b   
+    c   
+    d   
+    e   
+```{r}
+write(letters, file = "") 
+```
+    
+## 第十四章選擇題       
+1.(C)下列哪一個函數可以讀取剪貼簿資料?
+(A)read.delim( )    (B)scan( )        
+(C)readClipboard( ) (D)readline( )        
+3.(D)哪一個函數可以讀取Excel檔案資料?        
+(A)scan( ) (B)readClipboard( )        
+(C)read( ) (D)readWorksheetFromFile( )        
+5.(C)檔案的延伸檔名是txt 時，它的各欄位資料以什麼做分隔?        
+(A)\t (B)\n (C)TAB (D)逗號        
+7.(C)下列輸出函數，會將資料輸出至哪裡？        
+    > write.table(x,file = "clipboard", sep = "\t", row.names = FALSE)
+    >
+    (A)螢幕   (B)Clipboard 檔案   
+    (C)剪貼簿 (D)程式碼錯   
+
+## 第十四章複選題       
+1.(BC)下列那些函數可以讀取剪貼簿?（選擇2項）        
+(A)scan( )          (B)read.table( )        
+(C)readClipboard( ) (D)read.delim( )        
+(E)read.csv( )        
+
+## 第十四章實作題       
+1.請設計程式，此程式會要求輸入姓名，然後請回應"Welcome" 和所輸入的姓名        
+```{r}
+cat("HELLO! 您好! 請輸入您的姓名,輸入完成後請按兩次ENTER")
+Name <- scan(what='c')
+cat(Name,"\n")
+cat("HELLO! 您好!", Name)
+```
+
+3. 請參考實例ch14_18.R，但將資料改成有10 筆，讀取後執行下列工作       
+a. 求總計       
+```{r}
+x1 <- scan("C:/Users/ju891/OneDrive/文件/R/Note/ch14_18test1.txt")
+cat(x1, "\n")
+Sum <- sum(x1)
+cat("總和= ",Sum)
+```
+
+b. 求平均  
+```{r}
+x1 <- scan("C:/Users/ju891/OneDrive/文件/R/Note/ch14_18test1.txt")
+cat(x1, "\n")
+Average <- mean(x1)
+cat("平均= ",Average)
+```
+
+c. 求最大值       
+```{r}
+x1 <- scan("C:/Users/ju891/OneDrive/文件/R/Note/ch14_18test1.txt")
+cat(x1, "\n")
+Max <- max(x1)
+cat("最大值= ",Max)
+```
+
+d. 求最小值       
+```{r}
+x1 <- scan("C:/Users/ju891/OneDrive/文件/R/Note/ch14_18test1.txt")
+cat(x1, "\n")
+Min <- min(x1)
+cat("最小值= ",Min)
+```
+

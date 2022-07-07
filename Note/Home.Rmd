@@ -1,0 +1,33 @@
+---
+title: "Home"
+author: "Justine"
+date: "2021/5/27"
+output:
+  html_document:    
+    toc: yes    
+    toc_depth: 3
+    toc_float:    
+      collapsed: no   
+      smooth_scroll: yes   
+---       
+
+# [wk01](wk01_0225_.html)  
+# [wk02](wk02_0304_.html)     
+# [wk03](wk03_0311_.html)   
+# [wk04](wk04_0318_.html)   
+# [wk05](wk05_0325_.html)   
+# [wk06](wk06_0401_.html)   
+# [wk07](wk07_0408_.html)   
+# [wk08](wk08_0415_.html)   
+# [wk09](wk09_0422_.html)   
+# [wk10](wk10_0429_.html)   
+# [wk11](wk11_0506_.html)   
+# [wk12](wk12_0513_.html)   
+# [wk13](wk13_0520_.html)   
+# [Ch5 Practice](Ch5Practice.html)    
+# [Ch8 Practice](Ch8Practice.html)    
+# [Ch15 Practice](Ch15Practice.html)       
+# [Ch16 Practice](Ch16Practice.html)        
+# [Ch17 Practice](Ch17Practice.html)        
+# [Ch18 Practice](Ch18Practice.html)        
+# [Ch19 Practice](Ch19Practice.html)        

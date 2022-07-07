@@ -1,0 +1,1112 @@
+---
+title: "wk08_0415_"
+author: "Justine"
+date: "2021/4/15"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes 
+---
+# [Home](Home.html)
+
+# inclass   
+聖誕樹 practice       
+```{r}
+for(i in 10:1){
+  for(j in 1:(11-i)){
+    cat('$')
+  }
+  for(k in 1:(2*i-1)){
+    cat(' ')
+  }
+  for(j in 1:(11-i)){
+    cat('$')
+  }
+cat('\n')
+}
+```
+
+```{r}
+n <- 19
+lines <- seq(n, 1, -2)
+for(i in lines)
+{
+  cat(rep("$", (n-i)/2), sep = '')
+  cat(rep(" ", i), sep = '')
+  cat(rep("$", (n-i)/2), sep = '')
+  cat('\n')
+}
+```
+
+```{r}
+n <- 31
+star_lines<- seq(n,1,-2)
+
+for (i in star_lines)
+{
+  num_space <- (n-i)/2
+  num_star <-  i 
+  str_space <- ""
+  str_star <- ""
+   
+  if (num_space > 0)
+  {
+    for (k in num_space:1) str_star <- cat(str_star, "$", sep='')
+  }
+  for (m in num_star:1) str_space <- cat(str_space , " ", sep='')
+   if (num_space > 0)
+  {
+    for (k in num_space:1) str_star <- cat(str_star, "$", sep='')
+  }
+  cat (str_star, str_space, str_star,  sep='', "\n") 
+}
+```
+
+```{r}
+#ch6_1
+yes.Or.No <- c("Yes","No","No","Yes","Yes")
+first.factor <- factor(yes.Or.No)
+first.factor
+```
+
+```{r}
+#ch6_2
+yes.Or.No <- c("Yes","No","No","Yes","Yes")
+second.factor <- as.factor(yes.Or.No)
+second.factor
+```
+
+```{r}
+#ch6_3
+yes.Or.No <- c("Yes","No","No","Yes","Yes")
+third.factor <- factor(yes.Or.No,levels = c("Yes","No"))
+third.factor
+```
+
+```{r}
+#ch6_4
+directions <- c("East","West","North","East","West")
+fourth.factor <- factor(directions)
+fourth.factor
+```
+
+```{r}
+#ch6_5
+fifth.factor<- factor(fourth.factor, levels = c("East",
+                        "West","South","North"))
+fifth.factor
+#ch6_7
+fifth.factor
+as.character(fifth.factor)
+#ch6_8
+fifth.factor
+as.numeric(fifth.factor)
+#ch6_9
+levels(fifth.factor)
+#ch6_10
+nlevels(fifth.factor)
+#ch6_11
+length(fifth.factor)
+length(levels(fifth.factor))
+#ch6_12
+levels(fifth.factor)[2:4]
+```
+
+```{r}
+#ch6_6
+sixth.factor <- factor(fourth.factor, levels = c("East",
+              "West","South","North"), labels = c("E","W","S","N"))
+sixth.factor
+```
+
+```{r}
+temperature<- factor(c(28,32, 30,34, 32, 34))
+str(temperature)
+as.character(temperature)
+as.numeric(temperature)
+as.numeric(as.character(temperature))
+```
+
+```{r}
+#ch6_13
+str1 <- c("A","B","A","C","D","B","D")
+str1.order <- ordered(str1)
+str1.order
+```
+
+```{r}
+#ch6_14
+str1<- c("A","B","A","C","D","B","D")
+str2.order <- factor(str1, levels=c("D","C","B","A"),
+                     ordered=TRUE)
+str2.order
+
+#ch6_15
+str2.order
+which(str2.order >= "B")
+```
+
+
+```{r}
+#ch6_16
+first.factor
+table(first.factor)
+str2.order
+table(str2.order)
+size <- c("small","large","med","large","small","large")
+table(size)
+```
+
+```{r}
+#ch6_17  
+size.order <- factor(size, levels=c("small","med","large"),
+                     ordered=TRUE)
+size.order
+table(size.order)
+```
+
+```{r}
+#ch6_18
+table(state.region)
+```
+
+```{r}
+#ch10_1
+x.date<- as.Date("2016-08-01")
+x.date
+str(x.date)
+```
+
+```{r}
+#ch10_2
+x.date + 0:30
+```
+
+```{r}
+#ch10_3
+x.date - 0:6
+```
+
+```{r}
+#ch10_4 
+weekdays(x.date)
+```
+
+```{r}
+#ch10_5
+weekdays(x.date + 0:6)
+```
+
+```{r}
+#ch10_6
+months(x.date)
+```
+
+```{r}
+#ch10_7
+quarters(x.date)
+```
+
+```{r}
+#ch10_8
+Sys.localeconv()
+```
+
+```{r}
+#ch10_9  
+Sys.Date()
+```
+
+```{r}
+#ch10_10
+new.date <- seq(x.date, by="1 months",length.out=12)
+new.date
+```
+
+```{r}
+#ch10_11
+current.date <- Sys.Date()
+new.current.date <- seq(current.date,by="2 weeks", length.out=6)
+new.current.date
+```
+
+```{r}
+#ch10_12
+new.date2 <- seq(x.date, by ="3 days", length.out=10)
+new.date2
+```
+
+```{r}
+#ch10_13  
+as.Date("1 8 2016",format="%d %m %Y")
+```
+
+```{r}
+#ch10_14
+as.Date("1/8/2016", format="%d/%m/%y")
+```
+
+```{r}
+#ch10_15
+as.Date("1 8月 2016",format="%d %B %Y")
+```
+
+```{r}
+#ch10_16 
+Sys.time()
+```
+
+```{r}
+#ch10_17
+x.time <- "1 1 1970, 02:00:00"
+x.time.fmt <- "%d %m %Y, %H:%M:%S"
+x.Times <- as.POSIXct(x.time, format=x.time.fmt)
+x.Times
+
+#ch10_18
+x.Times + 330
+
+#ch10_20   
+x.Times > Sys.time()
+x.Times < Sys.time()
+```
+
+```{r}
+#ch10_19
+as.POSIXct(3600, tz="GMT", origin="2000-01-01")
+str(as.POSIXct(3600, tz="GMT", origin="2000-01-01"))
+```
+
+```{r}
+# more examples
+z <- Sys.time()               # the current datetime, as class "POSIXct"
+unclass(z)                    # a large integer
+floor(unclass(z)/86400)       # the number of days since 1970-01-01 (UTC)
+now <- as.POSIXlt(Sys.time()) # the current datetime, as class "POSIXlt"
+unlist(unclass(now))          # a list shown as a named vector
+now$year + 1900               # see ?DateTimeClasses
+months(now); weekdays(now)    # see ?months
+```
+
+```{r}
+#ch10_21
+xNew.Times <- seq(x.Times, by="1 years", length.out=6)
+xNew.Times
+```
+
+```{r}
+#ch10_22 
+xlt.time <- "1 1 1970, 02:00:00"
+xlt.time.fmt <- "%d %m %Y, %H:%M:%S"
+xlt.Times <- as.POSIXlt(x.time, format=x.time.fmt)
+xlt.Times
+
+#ch10_23
+xlt.Times$year
+
+#ch10_24
+xlt.Times$mday
+unclass(xlt.Times)
+```
+
+```{r}
+#ch10_25
+num <- c(271450,283661,305312,260354,247530,
+         227070,216419, 205854,204459,204414)
+num.birth <- ts(num, start=1998, freq=1)
+num.birth
+```
+
+```{r}
+#ch10_26
+water <- c(240, 236, 232, 231, 238, 241, 243, 243, 241, 242, 240, 239)
+water.levels <- ts(water, start=c(2016, 1),freq=12)
+water.levels
+```
+
+```{r}
+#ch10_27
+cash <- c(89778, 92346, 102311, 157800)
+cash.info <- ts(cash, start=c(2016,1),freq=4)
+cash.info
+```
+
+```{r}
+#ch10_28
+cost <- c(500,345, 220, 218, 670, 1280, 760, 2000, 280, 320)
+cost.info <- ts(cost, start=c(2016,42), freq=365)
+cost.info
+```
+
+```{r}
+ch11_5 <- function(x)
+{
+  if(!is.numeric(x))
+  {
+    print("need to input numeric vector")
+    return(NULL)
+  }
+  x.percent <- round(x*100, digits=2)
+  paste(x.percent,sep="","%")
+}
+
+
+ch11_5(c("a", "b", "c"))
+ch11_5(c(5, 4.123, 3.789))
+```
+
+---   
+
+# afterclass      
+
+# 第六章是非題    
+1.(X)有2個指令如下：   
+    > x <- c("Yes", "No", "Yes", "No", "Yes")   
+    > y <- factor(x)    
+    上述y的Levels數量有5    
+    
+```{r}
+x <- c("Yes", "No", "Yes", "No", "Yes")   
+y <- factor(x)
+levels(y)
+```
+3.(O)as.character( ) 函數：可將因子轉換成字串向量       
+
+# 第六章選擇題        
+1.(B)有指令如下:       
+    > x <- c("Yes", "No", "Yes", "No", "Yes")     
+    用哪一個指令，可以得到下列結果?   
+    x   
+     No Yes   
+      2   3       
+    (A)rev(x) (B)table(x) (C)factor(x) (D)ordered(x)    
+    
+```{r}
+x <- c("Yes", "No", "Yes", "No", "Yes")
+rev(x)
+table(x)
+factor(x)
+ordered(x)
+```      
+
+3.(D)以下指令會得到何結果？           
+    > x <- c("Yes", "No", "Yes", "No", "Yes")     
+    > y <- factor(x, levels = c("Yes", "No"),     
+    + labels = c("Y", "N"))   
+    > y         
+    (A)[1] Yes No  Yes No  Yes                
+       Levels: Yes No         
+    (B)[1] Yes No  Yes No  Yes          
+       Levels: No  Yes        
+    (C)[1] Yes No  Yes No  Yes              
+       Levels: No < Yes               
+    (D)[1] Y N Y N Y             
+       Levels: Y N      
+       
+```{r}
+x <- c("Yes", "No", "Yes", "No", "Yes")
+y <- factor(x, levels = c("Yes", "No"), labels = c("Y", "N")  )
+y
+```
+       
+5.(B)以下指令會得到何結果？        
+    > x <- c("Yes", "No", "Yes", "No", "Yes")           
+    > y <- factor(x)           
+    > as.numeric(y)            
+    (A)[1] 1 2 1 2 1  (B)[1] 2 1 2 1 2       
+    (C)[1] 1 1 1 2 2  (D)[1] 2 2 1 1 2       
+    
+```{r}
+x <- c("Yes", "No", "Yes", "No", "Yes")
+y <- factor(x)    
+as.numeric(y)
+```
+
+7.(D)以下指令會得到何結果？        
+    > x <- c("A", "B", "C", "D", "A", "A")    
+    > y <- factor(x)    
+    > length(y)    
+    (A)[1] 3 (B)[1] 4 (C)[1] 5 (D)[1] 6       
+    
+```{r}
+x <- c("A", "B", "C", "D", "A", "A")
+y <- factor(x)
+length(y)
+```
+
+# 第六章複選題        
+1.(ABD)有一個執行結果如下：        
+    [1] A B C D A A       
+    Levels: A B C D       
+    下列哪些指令可以得到上述結果?       
+    (A)> x <- c("A", "B", "C", "D", "A", "A")            
+       > factor(x)    
+    (B)> x <- c("A", "B", "C", "D", "A", "A")       
+       > as.factor(x)   
+    (C)> x <- c("A", "B", "C", "D", "A", "A")        
+       > ordered(x)   
+    (D)> x <- c("A", "B", "C", "D", "A", "A")         
+       > factor(x, ordered = is.ordered(x))     
+    (E)> x <- c("A", "B", "C", "D", "A", "A")    
+       > factor(x, levels = c("D", "C", "B", "A"))
+       
+```{r}
+x <- c("A", "B", "C", "D", "A", "A")            
+factor(x)    
+
+as.factor(x)   
+
+ordered(x)   
+
+factor(x, ordered = is.ordered(x))    
+
+factor(x, levels = c("D", "C", "B", "A"))
+```
+
+# 第六章實作題        
+1.將第4章第1題a題目，家人的血型向量，轉成因子               
+a. 將家人或親人（至少10人）的血型建立為字元向量，同時為每一個元素建立
+名稱，並列印出來。
+```{r}
+fblood <- c("A","O","O","B","O","B","A","AB","O","O")
+blood <- factor(fblood)
+blood
+```
+
+3.統計（或自行假設）班上20 人的考試成績:        
+95,93,84,76,85,73,64,82,77,65,74,43,72,62,89,67,73,65,88,71               
+計分方式如下：
+A. 90 分( 含) 以上            
+B. 80 ~ 89            
+C. 70 ~ 79            
+D. 60 ~ 69            
+E. 60 以下        
+請將上述資料建為有序因子，排列方式為A > B > C > D > E           
+a. 請列出成績B 以上的人
+```{r}
+stat.score <- c("A","A","B","C","B","C","D","B","C","D","C","E","C","D","B","D","C","D","B","C")
+ordered.grade <- factor(stat.score, levels = c("E", "D", "C", "B", "A"), ordered = TRUE)
+which(ordered.grade >= "B")
+```
+
+b. 請列出成績F 的人
+```{r}
+stat.score <- c("A","A","B","C","B","C","D","B","C","D","C","E","C","D","B","D","C","D","B","C")
+ordered.grade <- factor(stat.score, levels = c("E", "D", "C", "B", "A"), ordered = TRUE)
+which(ordered.grade == "E")
+```
+
+c. 請使用table( ) 函數瞭解個成績的分佈
+```{r}
+stat.score <- c("A","A","B","C","B","C","D","B","C","D","C","E","C","D","B","D","C","D","B","C")
+ordered.grade <- factor(stat.score, levels = c("E", "D", "C", "B", "A"), ordered = TRUE)
+table(ordered.grade)
+```
+
+# 第九章範例                
+```{r}
+#ch9_1
+x <- c("Hello R World")
+x
+strsplit(x, " ")
+```
+
+```{r}
+#ch9_2
+xVector <- strsplit(x, " ")[[1]]
+xVector
+#ch9_3
+xVector
+toupper(xVector)
+#ch9_4
+xVector
+tolower(xVector)
+```
+
+```{r}
+#ch9_5
+baskets.NBA2016.Jordon <- c(12,8,9,5,12)
+unique(baskets.NBA2016.Jordon)
+```
+
+```{r}
+#ch9_6
+coffee.Words <- "Coffee produced using the drying method is known as natureal coffee"
+coffee.NewWords <- strsplit(coffee.Words, " ")[[1]]
+unique(tolower(coffee.NewWords))
+```
+
+```{r}
+#ch9_7
+coffee.str <- c("Boiling","coffee","brings","out","a","bitterly","taste")
+coffee.fail1 <- paste(coffee.str)
+coffee.fail1
+```
+
+```{r}
+#ch9_8
+coffee.str <- c("Boiling","coffee","brings","out","a","bitterly","taste")
+paste(coffee.str)
+```
+
+```{r}
+#ch9_9
+paste(coffee.str, collapse=" ")
+```
+
+```{r}
+#ch9_10
+paste(coffee.str,collapse=NULL)
+```
+
+```{r}
+#ch9_11
+paste(coffee.str, collapse="-")
+```
+
+```{r}
+#ch9_12
+str1 <- letters[1:6]
+str2 <- 1:6
+paste(str1, str2)
+```
+
+```{r}
+#ch9_13
+str1 <- letters[1:6]
+str2 <- 1:6
+paste(str1, str2, sep="")
+```
+
+```{r}
+#ch9_14
+str3 <- 1:5
+paste(str1,str3,sep="")
+```
+
+```{r}
+#ch9_15
+paste("R", str3, sep="")
+```
+
+```{r}
+#ch9_16
+paste(str1, str2, sep="_")
+```
+
+```{r}
+#ch9_17 
+paste("R", str3, sep="", collapse=" ")
+```
+
+```{r}
+#ch9_18
+paste("R", str3, sep="_", collapse=" ")
+```
+
+```{r}
+#ch9_19
+cardsuit <- c("Spades","Hearts","Diamonds","Clubs")
+cardnum <- c("A", 2:10,"J","Q", "K")
+deck <- paste(rep(cardsuit, each=13),cardnum)
+deck
+```
+
+```{r}
+#ch9_20
+coffee.str
+sort(coffee.str)
+```
+
+```{r}
+#ch9_21
+sort(c("Bb","bb"))
+sort(c("Bb","bb"), decreasing = TRUE)
+```
+
+```{r}
+#ch9_22
+coffee.str
+sort(coffee.str, decreasing = TRUE)
+```
+
+```{r}
+state.name
+```
+
+```{r}
+#ch9_23
+substr(state.name, start=2, stop=4)
+```
+
+```{r}
+#ch9_24
+grep("M", state.name) 
+```
+
+```{r}
+#ch9_25
+state.name[19]
+```
+
+```{r}
+#ch9_26
+state.name[grep("M", state.name)] 
+```
+
+```{r}
+#ch9_27
+state.name[grep("m", state.name)]   
+```
+
+```{r}
+#ch9_28
+state.name[grep("New", state.name)]  
+```
+
+```{r}
+#ch9_29
+state.name[grep("new", state.name)]  
+```
+
+```{r}
+#ch9_30
+state.name[grep(" ", state.name)] 
+```
+
+```{r}
+#ch9_31
+sub("New","Old", state.name)
+```
+
+```{r}
+#ch9_32
+strtest <- c("test1.xls","test2.xls","test3.xls")
+str4 <- sub("test","", strtest)
+str4
+sub(".xls","",str4)
+```
+
+```{r}
+#ch9_33
+state.name[grep("New|South", state.name)]
+str5<- c("ch6.xls","ch7.xls","ch7.c","ch7.doc","ch8.xls")
+
+#ch9_34
+str5[grep("ch(6|7).xls",str5)]
+str6<- c("ch.xls","ch6.xls","ch7.xls","ch77.xls","ch87.xls","ch88.xls")
+
+#ch9_35
+str6[grep("ch(7*|8*).xls", str6)]
+
+#ch9_36
+str6[grep("ch(7+|8+).xls", str6)]
+```
+
+# 第九章是非題        
+1.(X)有系列指令如下：        
+    > x <- c("Good Night")    
+    > strsplit(x, " ")    
+    [[1]]   
+    [1] "Good" "Night"      
+    由上述可以知道strsplit()函數可以將此段句子拆散成單字，以空格為界，同時傳回向量物件，這個向量物件的元素是串列
+    
+```{r}
+x <- c("Good Night")    
+strsplit(x, " ")  
+```
+    
+3.(O)有系列指令如下：        
+    > x <- c("A", "B", "A", "C", "B")     
+    > unique(x)   
+    執行後可以得到下列結果:     
+    [1] "A" "B" "C"   
+    
+```{r}
+x <- c("A", "B", "A", "C", "B")     
+unique(x)
+```
+    
+5.(X)有系列指令如下：               
+    > x1 <- LETTERS[1:6]         
+    > x2 <- 1:5       
+    > paste(x1, x2)         
+    上述指令執行後會有錯誤產生   
+    
+```{r}
+x1 <- LETTERS[1:6]    
+x2 <- 1:5     
+paste(x1, x2) 
+```
+    
+7.(O)下列指令可以搜尋state.name數據集，州名含2個單字的州       
+    > state.name[grep(" ", state.name)]     
+    
+```{r}
+state.name[grep(" ", state.name)]
+```
+    
+# 第九章選擇題        
+1.(C)有指令如下：            
+    > x <- c("A", "B", "A", "C", "B")       
+    下列哪一個指令執行後，可以得到下列結果?       
+    [1] "A" "B" "C"     
+    (A)> sort(x)      
+    (B)> strsplit(x)      
+    (C)> unique(x)    
+    (D)> grep[unique(" ", x]     
+    
+```{r}
+x <- c("A", "B", "A", "C", "B") 
+sort(x)
+#strsplit(x)
+unique(x)
+#grep[unique(" ", x]
+```
+    
+3.(A)有系列指令如下：        
+    > str1 <- LETTERS[1:5]    
+    > str2 <- 1:5     
+    下列哪一指令執行後可以得到下列結果?       
+    [1] "A1" "B2" "C3" "D4" "E5"      
+    (A)> paste(str1, str2, sep = "")              
+    (B)> paste(str1, str2, sep = " ")              
+    (C)> paste(str1, str2, collapse = NULL)           
+    (D)> paste(str1, str2, collapse = "")           
+    
+```{r}
+str1 <- LETTERS[1:5]    
+str2 <- 1:5
+paste(str1, str2, sep = "")              
+paste(str1, str2, sep = " ")              
+paste(str1, str2, collapse = NULL)           
+paste(str1, str2, collapse = "")
+```
+    
+5.(C)搜尋R 語言內附的state.name數據，下列哪一指令可以搜尋內含"New"字串的州，執行後可以得到下列結果?           
+    [1] "New Hampshire" "New Jersey"    "New Mexico"    "New York"            
+    (A)> substr("New", state.name)                          
+    (B)> grep("New", state.name)                          
+    (C)> state.name[grep("New", state.name)]                       
+    (D)> strsplit("New", state.name)            
+ 
+```{r}
+#substr("New", state.name)                          
+grep("New", state.name)                          
+state.name[grep("New", state.name)]                       
+strsplit("New", state.name)
+```
+    
+7.(C)有一個字串內容如下：        
+    > strtxt <- c("ch.txt", "ch3.txt", "ch33.txt", "ch83.txt", "ch88.txt" )   
+    下列哪一指令執行後可以得到下列結果?       
+    [1] "ch.txt"   "ch3.txt"  "ch33.txt" "ch83.txt" "ch88.txt"      
+    (A)> strtxt[grep("ch3|8).txt", strtxt)]                 
+    (B)> strtxt[grep("ch3+|8+).txt", strtxt)]                        
+    (C)> strtxt[grep("ch3*|8*).txt", strtxt)]                        
+    (D)> strtxt[grep("ch3-|8-).txt", strtxt)]               
+    
+```{r}
+strtxt <- c("ch.txt", "ch3.txt", "ch33.txt", "ch83.txt", "ch88.txt" )
+strtxt[grep("ch3|8).txt", strtxt)]                 
+strtxt[grep("ch3+|8+).txt", strtxt)]                        
+strtxt[grep("ch3*|8*).txt", strtxt)]                        
+strtxt[grep("ch3-|8-).txt", strtxt)]
+```
+
+# 第九章複選題        
+1.(CD)下列哪些函數具有尋找字串的功能？        
+    (A) strsplit( ) (B) strsearch( )            
+    (C) grep( )     (D) substr( )     (E) unique( )       
+
+# 第九章實作題
+1.請將自己姓名轉成英文，可以得到3 個字串。例如："Hung"　"Jiin"　"Kwei"        
+請用paste( ) 函數，將上述字串轉成：           
+a. "Hung Jiin Kwei"          
+```{r}
+name <- c("Hung", "Jiin", "Kwei")   
+paste(name, collapse = " ")
+```
+
+b. "Jiin Kwei Hung"       
+```{r}
+name <- c("Jiin", "Kwei", "Hung")
+paste(name, collapse = " ")
+```
+
+c. 請將"Hung Jiin Kwei" 字串轉成"Hung"　　"Jiin"　　"Kwei"            
+```{r}
+Name <- c("Hung Jiin Kwei")
+strsplit(Name, " ")
+```
+
+3.搜尋state.name 數據集中，字串含"South" 的州       
+```{r}
+state.name[grep("South", state.name)]
+```
+
+5.搜尋state.name 數據集中，只列出含一個單字的州           
+```{r}
+state.name[grep(" ", state.name, invert = TRUE)]
+```
+
+---           
+
+# selfpractice    
+```{r}
+for(i in 1:10){
+  for(j in 1:(11-i)){
+    cat(' ')
+  }
+  for(k in 1:(2*i-1)){
+    cat('*')
+  }
+  for(j in 1:(11-i)){
+    cat(' ')
+  }
+cat('\n')
+}
+```
+
+# 第六章是非題    
+2.(O)建立因子（factor）時，如果想要縮寫Levels的資料，可以使用labels參數配合levels 參數做設定        
+4.(X)as.numeric( )函數：可將數值向量轉換成因子       
+
+# 第六章選擇題        
+2.(A)以下指令會得到何結果？           
+    > x <- c("Yes", "No", "Yes", "No", "Yes")     
+    > y <- factor(x, levels = c("Yes", "No"))     
+    > y           
+    (A)[1] Yes No  Yes No  Yes              
+       Levels: Yes No       
+    (B)[1] Yes No  Yes No  Yes            
+       Levels: No  Yes        
+    (C)[1] Yes No  Yes No  Yes               
+       Levels: No < Yes            
+    (D)[1] Y N Y N Y                
+       Levels: Y N          
+       
+```{r}
+x <- c("Yes", "No", "Yes", "No", "Yes")     
+y <- factor(x, levels = c("Yes", "No"))
+y
+```
+
+4.(C)以下指令會得到何結果？        
+    > x <- c("Yes", "No", "Yes", "No", "Yes")           
+    > y <- ordered(x)           
+    > y         
+    (A)[1] Yes No  Yes No  Yes                
+       Levels: Yes No       
+    (B)[1] Yes No  Yes No  Yes            
+       Levels: No  Yes        
+    (C)[1] Yes No  Yes No  Yes               
+       Levels: No < Yes              
+    (D)[1] Y N Y N Y             
+       Levels: Y N          
+       
+```{r}
+x <- c("Yes", "No", "Yes", "No", "Yes")
+y <- ordered(x)   
+y
+```
+       
+6.(B)以下指令會得到何結果？        
+    > x <- c("A", "B", "C", "D", "A", "A")    
+    > y <- factor(x)    
+    > nlevels(y)    
+    (A)[1] 3 (B)[1] 4 (C)[1] 5 (D)[1] 6       
+    
+```{r}
+x <- c("A", "B", "C", "D", "A", "A")
+y <- factor(x)
+nlevels(y)
+```
+
+8.(C)以下指令會得到何結果？                   
+    > x <- c("A", "B", "C", "D", "A", "A")         
+    > y <- factor(x, levels = c("D", "C", "B", "A"),         
+    + ordered = TRUE)             
+    > which(y >= "A")           
+    (A)[1] 2 3 4 (B)[1] 1 1 1 (C)[1] 1 5 6 (D)[1] 2 4 6     
+    
+```{r}
+x <- c("A", "B", "C", "D", "A", "A")    
+y <- factor(x, levels = c("D", "C", "B", "A"), ordered = TRUE)   
+which(y >= "A") 
+```
+    
+# 第六章實作題        
+2.重複前一題，建立因子時，使用levels將血型類別順序設為，"A"、"AB"、"B"、"O"
+```{r}
+fblood <- c("A","O","O","B","O","B","A","AB","O","O")
+blood <- factor(fblood, levels = c("A", "AB", "B", "O"))
+blood
+```
+
+# 第九章是非題        
+2.(B)有系列指令如下：        
+    > x <- c("Hello R")   
+    > toupper(x)    
+    執行後可以得到下列結果   
+    [1] "HELLO R"   
+    
+```{r}
+x <- c("Hello R")   
+toupper(x)
+```
+    
+4.(X)有系列指令如下：          
+    > x1 <- LETTERS[1:3]    
+    > x2 <- 1:3     
+    > paste(x1, x2)     
+    執行後可以得到下列結果      
+    [1] "A1" "B2" "C3"      
+    
+```{r}
+x1 <- LETTERS[1:3]    
+x2 <- 1:3     
+paste(x1, x2)
+```
+    
+6.(X)下列指令可以搜尋state.name 數據集，字串含"M" 的州       
+    > substr("M", state.name)
+    
+```{r}
+#substr("M", state.name)
+```
+
+8.(X)下列指令可以搜尋state.name 數據集，州名含有"New" 和"South"        
+    > state.name[grep("New | South", state.name)]         
+    執行後可以得到下列結果      
+   [1] "New Hampshire"  "New Jersey"     "New Mexico"     "New York"         
+   [5] "South Carolina" "South Dakota"      
+
+```{r}
+state.name[grep("New | South", state.name)]
+```
+
+# 第九章選擇題        
+2.(D)有字串st內容如下：            
+    > st    
+    [1] "Silicon" "Stone" "Education"     
+    下列哪一指令執行後可以得到下列結果?     
+    [1] "Silicon Stone Education"       
+    (A)> paste(st)                                       
+    (B)> paste(st, collapse = NULL)                                    
+    (C)> paste(st, sep = "")            
+    (D)> paste(st, collapse = " ")
+    
+```{r}
+st <- c("Silicon", "Stone", "Education")
+paste(st)                                       
+paste(st, collapse = NULL)                                    
+paste(st, sep = "")            
+paste(st, collapse = " ")
+```
+  
+4.(B)有系列指令如下：        
+    > card <- c("Spades", "Hearts", "Diamonds", "Clubs")       
+    > cnum <- c("A", 2:10, "J", "Q", "K")       
+    下列哪一指令執行後可以得到下列結果?       
+    [1] "Spades A"    "Spades 2"    "Spades 3"    "Spades 4"    "Spades 5"    
+    [6] "Spades 6"    "Spades 7"    "Spades 8"    "Spades 9"    "Spades 10"    
+   [11] "Spades J"    "Spades Q"    "Spades K"    "Hearts A"    "Hearts 2"    
+   [16] "Hearts 3"    "Hearts 4"    "Hearts 5"    "Hearts 6"    "Hearts 7"    
+   [21] "Hearts 8"    "Hearts 9"    "Hearts 10"   "Hearts J"    "Hearts Q"      
+   [26] "Hearts K"    "Diamonds A"  "Diamonds 2"  "Diamonds 3"  "Diamonds 4"      
+   [31] "Diamonds 5"  "Diamonds 6"  "Diamonds 7"  "Diamonds 8"  "Diamonds 9"        
+   [36] "Diamonds 10" "Diamonds J"  "Diamonds Q"  "Diamonds K"  "Clubs A"     
+   [41] "Clubs 2"     "Clubs 3"     "Clubs 4"     "Clubs 5"     "Clubs 6"       
+   [46] "Clubs 7"     "Clubs 8"     "Clubs 9"     "Clubs 10"    "Clubs J"     
+   [51] "Clubs Q"     "Clubs K"         
+    (A)> paste(card[1:52], cnum)                          
+    (B)> paste(rep(card, each = 13), cnum)                         
+    (C)> paste(rep(card, each = 52), cnum)                      
+    (D)> paste(card, cnum)          
+    
+```{r}
+card <- c("Spades", "Hearts", "Diamonds", "Clubs")
+cnum <- c("A", 2:10, "J", "Q", "K")
+paste(card[1:52], cnum)                          
+paste(rep(card, each = 13), cnum)                         
+paste(rep(card, each = 52), cnum)                      
+paste(card, cnum)
+```
+    
+6.(B)搜尋R語言內附的state.name數據，下列哪一指令可以搜尋州名內含"N"和"M"的州，執行後可以得到下列結果?       
+    [1] "Maine"          "Maryland"       "Massachusetts"  "Michigan"      
+    [5] "Minnesota"      "Mississippi"    "Missouri"       "Montana"       
+    [9] "Nebraska"       "Nevada"         "New Hampshire"  "New Jersey"    
+   [13] "New Mexico"     "New York"       "North Carolina" "North Dakota"
+    (A)> grep("N|M", state.name)      
+    (B)> state.name[grep("N|M", state.name)]                       
+    (C)> state.name[grep("N | M", state.name)]                       
+    (D)> grep("N | M", state.name)     
+    
+```{r}
+grep("N|M", state.name)      
+state.name[grep("N|M", state.name)]                       
+state.name[grep("N | M", state.name)]                       
+grep("N | M", state.name)
+```
+    
+8.(B)有一個字串內容如下：        
+    > strtxt <- c("ch.txt", "ch3.txt", "ch33.txt", "ch83.txt", "ch88.txt")          
+    下列哪一指令執行後可以得到下列結果?               
+    [1] "ch3.txt"  "ch33.txt" "ch88.txt"    
+    (A)> strtxt[grep("ch(3|8).txt", strtxt)]                                 
+    (B)> strtxt[grep("ch(3+|8+).txt", strtxt)]                          
+    (C)> strtxt[grep("ch(3*|8*).txt", strtxt)]                       
+    (D)> strtxt[grep("ch(3-|8-).txt", strtxt)]            
+
+```{r}
+strtxt <- c("ch.txt", "ch3.txt", "ch33.txt", "ch83.txt", "ch88.txt")
+strtxt[grep("ch(3|8).txt", strtxt)]                                 
+strtxt[grep("ch(3+|8+).txt", strtxt)] 
+strtxt[grep("ch(3*|8*).txt", strtxt)]
+strtxt[grep("ch(3-|8-).txt", strtxt)]
+```
+
+# 第九章實作題
+2.請建立5 筆姓名字串資料，然後執行排序從小排到大和從大排到小        
+```{r}
+Name2 <- c("Chang Three", "Chao One", "Lee Four", "Wang Five", "Wang Two")
+sort(Name2, decreasing = TRUE)
+```
+
+4.搜尋state.name 數據集中，將字串含"M"，改成"m"       
+```{r}
+sub("M", "m", state.name)
+```
+
+6.搜尋state.name 數據集中，列出含"A" 和"M" 的州
+```{r}
+state.name[grep("A|M", state.name)]
+```
+
+---   
+# 筆記    
+## Ch06       
+創建 : factor(), as.factor()    
+屬性 :    
+- 元素內容    
+- 水準 : levels       
+- 標籤(代號, 縮寫) : labels       
+常用函數 : table( )     
+
+## Ch09       
+strsplit( ) : 句子分離; string split                    
+toupper( ) tolower : 修改大小寫; to upper case, to lower case       
+unique( ) : quiue 獨特 唯一               
+paste( ) :  黏貼            
+sort( ): 排序           
+grep( ): 搜尋 Global Regular Expression Print            
+sub( ): 更改 substitue            
+as.character( ):轉換物件為文字向量類型                
+as.numeric( ):轉換物件為數值向量類型        
+rev():向量逆轉        
+table():各類資料計數        

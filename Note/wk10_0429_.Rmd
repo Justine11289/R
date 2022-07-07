@@ -1,0 +1,310 @@
+---
+title: "wk10_0429_"
+author: "Justine"
+date: "2021/4/29"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes       
+---       
+
+# [Home](Home.html)  
+
+# inclass   
+wk10_0429_迴圈_筆記整理         
+筆記整理說明         
+word        
+markdown 目錄       
+---
+title: "wk08_0415_TOC"                
+author: "R434"               
+date: "2021/4/15"              
+output:                   
+  html_document:                          
+    toc: true                         
+    toc_depth: 2               
+    toc_float:               
+      collapsed: false                
+      smooth_scroll: false                
+toc :　table of content               
+float : 漂浮               
+collapsed : 崩潰                
+scroll : 滾動               
+markdown 目錄       
+---   
+
+# afterclass        
+## 第七章實例       
+```{r}
+#ch7_1
+mit.Name <- c("Kevin","Peter","Frank","Maggie")
+mit.Gender <-c("M","M","M","F")
+mit.Height <- c(170,175,165,168)
+mit.info <- data.frame(mit.Name, mit.Gender, mit.Height)
+mit.info
+```
+
+```{r}
+#ch7_2
+names(mit.info)
+colnames(mit.info)
+```
+
+```{r}
+#ch7_3
+row.names(mit.info)
+```
+
+```{r}
+#ch7_4  
+names(mit.info)[1] <- "m.name"
+names(mit.info)
+```
+
+```{r}
+#ch7_5
+names(mit.info) <- c("Name","Gender","Height")
+names(mit.info)
+mit.info
+str(mit.info)
+```
+
+```{r}
+#ch7_6
+mit.Newinfo <- data.frame(mit.Name, mit.Gender, mit.Height, stringsAsFactors=FALSE)
+str(mit.Newinfo)
+```
+
+```{r}
+#ch7_7
+mit.Newinfo[, "mit.Name"]
+```
+
+```{r}
+#ch7_8
+mit.Newinfo[ 2, ]
+```
+
+```{r}
+#ch7_9
+mit.Newinfo[ 3, "mit.Name"]
+```
+
+```{r}
+#ch7_10
+mit.Newinfo[ 3, 1]
+```
+
+```{r}
+#ch7_11
+mit.Newinfo$mit.Name
+mit.Newinfo[, 1]
+mit.Newinfo[, "mit.Name"]
+```
+
+```{r}
+#ch7_12
+mit.Newinfo[1]
+str(mit.Newinfo[1])
+mit.Newinfo[-1]
+str(mit.Newinfo[-1])
+
+names(mit.Newinfo)<- c("Name","Gender","Height")
+```
+
+```{r}
+#ch7_13
+Mit.Newinfo <- rbind(mit.Newinfo, c("Amy","F", 161))
+Mit.Newinfo
+```
+
+```{r}
+#ch7_14
+mit.Newstu <- data.frame(Name=c("Tony","Julia"), Gender=c("M","F"),Height=c(171,163))
+Mit.Newinfo2 <- rbind(Mit.Newinfo,mit.Newstu)
+Mit.Newinfo2
+```
+
+```{r}
+#ch7_15
+Mit.Newinfo2[c("8","9"), ] <- c("Ivan","Ira","M","M",181, 166)
+Mit.Newinfo2
+```
+
+```{r}
+#ch7_16
+Weight <- c(65, 71, 58, 55)
+mit.Newinfo$Weight <- Weight
+mit.Newinfo
+```
+
+```{r}
+#ch7_17
+Age <- c(19, 20, 20, 19)
+Score <- c(88, 91, 75, 80)
+mit.addinfo <- data.frame(Age, Score)
+mit.Finalinfo <- cbind(mit.Newinfo, mit.addinfo)
+mit.Finalinfo
+```
+
+---       
+
+# selfpractice    
+## 第七章是非題       
+1.(X)數據框(data frame)是由一系列的欄向量(column vector)所組成,我們可以將它視為矩陣的擴充        
+2.(X)colnames( )是唯一一個可查詢和取得數據框(data frame)的函數       
+3.(O)假設x.df是一個數據框(data frame),下列2道指令執行結果相同       
+    > names(x.df) 或 > colnames(x.df)     
+
+4.(X)數據框(data frame)與矩陣(matrix)的差別之一在於數據框中每一欄
+(col)的長度可以不相等，而矩陣中每一欄(col)的長度一定要相等        
+5.(X)有系列指令如下：       
+    > x.name <- c("John", "Mary")     
+    > x.sex <- c("M", "F")    
+    > x.weight <- c(70, 50)   
+    > x.df <- data.frame(x.name, x.sex, x.weight)   
+    > x.df[ , 1]   
+    執行後可以得到下列結果    
+    [1] John Mary   
+    Levels: John Mary     
+    
+```{r}
+x.name <- c("John", "Mary")     
+x.sex <- c("M", "F")    
+x.weight <- c(70, 50)   
+x.df <- data.frame(x.name, x.sex, x.weight)   
+x.df[ , 1]   
+```
+
+6.(X)有系列指令如下：    
+    > x.name <- c("John", "Mary")     
+    > x.sex <- c("M", "F")    
+    > x.weight <- c(70, 50)   
+    > x.df <- data.frame(x.name, x.sex, x.weight, stringsAsFactors = FALSE)    
+    > x.df[2, 1]      
+    執行後可以得到下列結果    
+    [1] Mary   
+    Levels: John Mary     
+    
+```{r}
+x.name <- c("John", "Mary")     
+x.sex <- c("M", "F")    
+x.weight <- c(70, 50)   
+x.df <- data.frame(x.name, x.sex, x.weight, stringsAsFactors = FALSE)   
+x.df[2, 1] 
+```
+
+7.(O)cbind( )函數，可將2個數據框組合        
+
+## 第七章選擇題         
+1.(D)下列哪一類型的數據結構可允許有不同資料型態?        
+  (A)向量Vector    (B)矩陣Matrix        
+  (C)陣列組 Array  (D)數據框Data Frame        
+2.(D)由以下指令可以判斷，mtcars物件是什麼數據類型?        
+  > str(mtcars)     
+  'data.frame':	32 obs. of  11 variables:     
+  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...     
+  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...     
+  $ disp: num  160 160 108 258 360 ...     
+  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...      
+  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...     
+  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...      
+  $ qsec: num  16.5 17 18.6 19.4 17 ...      
+  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...       
+  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...     
+  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...     
+  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...     
+  (A)向量Vector (B)矩陣Matrix     
+  (C)因子Factor (D)數據框Data Frame     
+  
+3.(B)由以下指令可以判斷，mtcars物件有多少欄位?        
+  > str(mtcars)     
+  'data.frame':	32 obs. of  11 variables:     
+  (A)10 (B)11 (C)12 (D)13     
+
+4.(B)以下指令會得到何結果？        
+  > x.name <- c("John", "Mary")     
+  > x.sex <- c("M", "F")    
+  > x.weight <- c(70, 50)   
+  > x.df <- data.frame(x.name, x.sex, x.weight, stringsAsFactors = FALSE)    
+  > x.df[1, 1]  
+  (A)[1] "Mary"           (B)[1] "John"         
+  (C)[1] Mary             (D)[1] John        
+     Levels: John Mary       Levels: John Mary        
+  
+```{r}
+x.name <- c("John", "Mary")     
+x.sex <- c("M", "F")    
+x.weight <- c(70, 50)   
+x.df <- data.frame(x.name, x.sex, x.weight, stringsAsFactors = FALSE)   
+x.df[1, 1] 
+```
+
+5.(A)以下指令會得到何結果？        
+  > x.name <- c("John", "Mary")     
+  > x.sex <- c("M", "F")    
+  > x.weight <- c(70, 50)   
+  > x.df <- data.frame(x.name, x.sex, x.weight, stringsAsFactors = FALSE)    
+  > names(x.df) <- c("name", "sex", "weight")     
+  > x.df    
+  (A)  name sex weight      (B)  x.name x.sex x.weight      
+     1 John	  M	    70         1   John	    M	      70		    
+     2 Mary	  F	    50         2   Mary	    F	      50          
+  (C)[1] Mary               (D)[1] John        
+     Levels: John Mary         Levels: John Mary          
+
+```{r}
+x.name <- c("John", "Mary")     
+x.sex <- c("M", "F")    
+x.weight <- c(70, 50)   
+x.df <- data.frame(x.name, x.sex, x.weight, stringsAsFactors = FALSE)   
+names(x.df) <- c("name", "sex", "weight") 
+x.df
+```
+
+6.(C)以下指令執行後，可以獲得多少筆資料？       
+  > x.name <- c("John", "Mary")     
+  > x.sex <- c("M", "F")    
+  > x.weight <- c(70, 50)   
+  > x.df <- data.frame(x.name, x.sex, x.weight, stringsAsFactors = FALSE)  
+  > y.df <- rbind(x.df, c("Frankie", "M", 66))      
+  (A)1 (B)2 (C)3 (D)4         
+  
+```{r}
+x.name <- c("John", "Mary")     
+x.sex <- c("M", "F")    
+x.weight <- c(70, 50)   
+x.df <- data.frame(x.name, x.sex, x.weight, stringsAsFactors = FALSE)
+y.df <- rbind(x.df, c("Frankie", "M", 66)) 
+```
+  
+7.(C)以下指令會得到何結果？            
+  > x.name <- c("John", "Mary")     
+  > x.sex <- c("M", "F")    
+  > x.weight <- c(70, 50)   
+  > x.df <- data.frame(x.name, x.sex, x.weight)     
+  > age <- c(23,20)   
+  > y.df <- data.frame(age)   
+  > new.df <- cbind(x.df, y.df)   
+  > new.df
+  (A)  x.name x.sex x.weight            (B)   x.name x.sex  x.weight         
+     1   John	    M	      70               1    John	    M	      70      
+     2   Mary	    F	      50               2    Mary	    F	      50        
+                                           3 Frankie      M       66       
+  (C)  x.name x.sex x.weight age        (D)   name sex weight     
+     1   John	    M	      70  23           1  John	 M	   70             
+     2   Mary	    F	      50  20           2  Mary	 F	   50         
+     
+```{r}
+x.name <- c("John", "Mary")     
+x.sex <- c("M", "F")    
+x.weight <- c(70, 90)   
+x.df <- data.frame(x.name, x.sex, x.weight)
+age <- c(23,20) 
+y.df <- data.frame(age)
+new.df <- cbind(x.df, y.df)
+new.df
+```

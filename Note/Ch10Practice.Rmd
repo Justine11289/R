@@ -1,0 +1,107 @@
+---
+title: "Ch10Practice"
+author: "Justine"
+date: "2021/7/3"
+output:
+  html_document:    
+    toc: yes    
+    toc_depth: 3
+    toc_float:    
+      collapsed: no   
+      smooth_scroll: yes  
+---
+# [Home](Home.html)   
+
+### 是非題
+1.(O)有指令如下：   
+    > x.date <- as.Date("2016-01-01")   
+    以下指令可返回x.date和過去3天的星期資料   
+    > weekdays(x.date-0:3)  
+    
+```{r}
+x.date <- as.Date("2016-01-01")
+weekdays(x.date-0:3)
+```
+
+2.(X)有系列指令如下：    
+    > x.date <- as.Date("2016-01-01")   
+    > months((x.date))    
+    執行後可以得到下列結果:   
+    [1] "7月" 
+    
+```{r}
+x.date <- as.Date("2016-01-01")
+months((x.date))
+```
+
+3.(X)Sys.time()可以取得格林威治(GMT)時間   
+4.(O)as.POSIXct()函數所傳回的是秒數，所以可以用加減秒數，更新此時間的向量物件     
+5.(X)有系列指令如下：    
+    > x.Times <- as.POSIXct(x.time,format = x.time.fmt)   
+    > x.Times > Sys.time()  
+    上述指令執行後會傳回TRUE   
+    
+```{r}
+#x.Times <- as.POSIXct(x.time,format = x.time.fmt)   
+#x.Times > Sys.time() 
+```
+    
+---   
+
+### 選擇題    
+1.(D)下列哪一個函數，可以傳回日期物件是第幾季?       
+    (A)days() (B)months() (C)weekdays() (D)quarters()       
+2.(C)下列哪一個函數，可以傳回目前系統日期，但不傳回系統時間?        
+    (A)as.Date( )  (B)Sys.localeconv( )       
+    (C)Sys.Date( ) (D)Sys.time( )               
+3.(D)下列哪一個函數，可以傳回目前系統時間?       
+    (A)as.Date( )  (B)Sys.localeconv( )       
+    (C)Sys.date( ) (D)Sys.time( )   
+4.(B)有系列指令如下：   
+    > num <- c(222222,333333,444444,555555)   
+    > num.info <- ts(num,start = 2015,frequency = 1)    
+    下列哪一項目的說明是錯的?   
+    (A)時間物件的最後一筆是2018   
+    (B)時間頻率是1天    
+    (C)時間物件的第一筆是2015   
+    (D)上述num向量代表4年的資料   
+    
+```{r}
+num <- c(222222,333333,444444,555555) 
+num.info <- ts(num,start = 2015,frequency = 1)
+num.info
+```
+
+5.(C)有系列指令如下：   
+    > num <- c(240,250,272,263,255,261)   
+    > num.info <- ts(num,start = c(2016,1),frequency = 12)    
+    下列哪一項目的說明是錯的?   
+    (A)時間物件的第一筆是2016年1月    
+    (B)時間物件的最後一筆是2016年6月    
+    (C)時間頻率是12天   
+    (D)上述有6個月的資料    
+
+```{r}
+num <- c(240,250,272,263,255,261)   
+num.info <- ts(num,start = c(2016,1),frequency = 12)
+num.info
+```
+
+6.(B)有系列指令如下：   
+    > x.date <- as.Date("2016-01-01")   
+    > x.Ndate <- seq(x.date,by = "1 months",length.out = 6)   
+    請問執行下列指令可以得到什麼結果?   
+    > x.Ndate[2]  
+    (A)[1] "2016-01-01"   (B)[1] "2016-02-01"   
+    (C)[1] "2016-05-01"   (D)[1] "2016-04-01"   
+  
+```{r}
+x.date <- as.Date("2016-01-01")
+x.Ndate <- seq(x.date,by = "1 months",length.out = 6)
+x.Ndate[2]
+```
+
+---   
+### 複選題        
+1.(AB)在使用as.POSIXct()和as.POSIXct()函數中，下列哪些格式代碼與小時數有關?     
+    (A)%H (B)%I (C)%M (D)%S (E)%p       

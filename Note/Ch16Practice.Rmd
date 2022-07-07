@@ -1,0 +1,209 @@
+---
+title: "Ch16Practice"
+author: "Justine"
+date: "2021/7/3"
+output:
+  html_document:    
+    toc: yes    
+    toc_depth: 3
+    toc_float:    
+      collapsed: no   
+      smooth_scroll: yes  
+---
+# [Home](Home.html)   
+
+### 是非題        
+1.(X)我們可以使用install( )函數來下載所需要的擴展包        
+2.(X)常被用來獲得數據集中趨勢的R函數有三種：mean(), median()與mode()       
+3.(X)R程式求取標準差的函數為stdev()        
+4.(O)有2個指令如下：       
+    > x <- c(3,3,3,2,2,1)   
+    > unique(x)   
+    上述指令執行結果如下：    
+    [1] 3 2 1   
+    
+```{r}
+x <- c(3,3,3,2,2,1)   
+unique(x)
+```
+
+5.(O)我們可以用quantile()函數同時取得第1四分位數、第2四分位數以及第3四分位數       
+6.(O)有1個指令如下：       
+    > quantile(1:7)   
+    上述指令執行結果如下：        
+      0%  25%  50%  75% 100%    
+     1.0  2.5  4.0  5.5  7.0    
+     
+```{r}
+quantile(1:7)
+```
+
+7.(O)R可以使用table()函數去取得數據出現的次數或稱頻率        
+8.(X)R可以使用hist()函數去繪製直方圖，若使用參數nbreaks =10，表示指定柱狀的數量為10          
+9.(O)R語言有提供一個密度函數density()，可以將欲建圖表的數據利用這個函數轉成一個密度物件串列(List)，未來可將這個物件放入plot( )函數內就可以繪製密度圖       
+10.(O)若使用mycar數據框物件繪製汽缸數(cyl)對油耗(mpg)之間的箱型比較圖。可以使用以下的R指令：       
+    > boxplot(mpg~cyl,data = mycar)       
+
+---       
+
+### 選擇題        
+1.(D)以下哪ㄧ個不是正確的求取數據集中趨勢的函數？        
+    (A)mean()           (B)median()       
+    (C)所列三個函數都是 (D)mode()       
+2.(C)R程式求取標準差的函數為何？       
+    (A)stdev() (B)std() (C)sd() (D)dev()        
+3.(C)以下指令會得到何數值結果？       
+    > x <- c(3,3,3,2,2,1)   
+    > length(unique(x))   
+    (A)[1] 1 (B)[1] 6 (C)[1] 3 (D)[1] 0     
+    
+```{r}
+x <- c(3,3,3,2,2,1)   
+length(unique(x)) 
+```
+    
+4.(B)以下指令會得到何結果？        
+    > x <- c(1,1,1,1,2,2,3)   
+    > table(x)    
+    (A)[1] 1 2 3  
+    (B)x    
+       1 2 3    
+       4 2 1    
+    (C)x       
+       1 2 3    
+       1 2 3     
+    (D)[1] 1 4 2 2 3 1    
+    
+```{r}
+x <- c(1,1,1,1,2,2,3)
+table(x)
+```
+    
+5.(A)以下指令會得到何結果?       
+    > x <- c(1,1,1,1,2,2,3,4)   
+    > tx <- table(x)    
+    > index <- tx == max(tx)      
+    > names(tx[index])        
+    (A)[1]"1" (B)[1]"2" (C)[1]"3" (D)[1]"4"   
+    
+```{r}
+x <- c(1,1,1,1,2,2,3,4)
+tx <- table(x) 
+index <- tx == max(tx)
+names(tx[index])
+```
+    
+6.(C)以下指令會得到何數值結果?       
+    > x <- c(1,1,1,1,2,2,3,4)   
+    > which.max(x)
+    (A)[1] 1 (B)[1] 4 (C)[1] 8 (D)[1] 6     
+    
+```{r}
+x <- c(1,1,1,1,2,2,3,4)
+which.max(x)
+```
+    
+7.(B)給定x向量內容為(1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7)，使用以
+下何指令可以得到以下的統計圖?    
+    (A)> hist(x)        
+       > density(x)   
+    (B)> hist(x,freq=FALSE)     
+       > lines(density(x))      
+    (C)> plot(density(x))       
+       > hist(x)    
+    (D)> hist(x)    
+       > lines(density(x))    
+       
+```{r}
+x <- c(1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7)
+hist(x)
+density(x)
+
+hist(x,freq=FALSE)     
+lines(density(x))
+
+plot(density(x))       
+hist(x)    
+
+hist(x)    
+lines(density(x))
+```
+
+9.(C)若兩個向量x與y執行了以下的指令與結果:     
+    > length(x)   
+    [1] 10    
+    > cor(x,y)    
+    [1] -0.9006627    
+    可知兩向量之間的關係為何？        
+    (A)輕微的正線性相關 (B)強烈正線性相關       
+    (C)強烈負線性相關   (D)無法判斷線性相關性       
+
+---         
+
+### 複選題        
+1.(BD)以下何指令可以用來下載MASS擴充包?        
+    (A)> load(MASS)     (B)> install.packages"(MASS)"       
+    (C)> download(MASS) (D)> library(MASS)    (E)> install(MASS)        
+2.(DE)summary()函數所提供的結果中不包含以下何種統計值?       
+    (A)mean   (B)3rd. Qu.       
+    (C)median (D)mode (E)var        
+---   
+
+### 實作題        
+1.以rnorm(100,mean=60,sd=12)產生100筆平均數為60標準差為12的常態分配
+  隨機數向量x，並計算出x的平均數、中位數、眾數、變異數、標準差、全距、最大值、最小值、第一四分位數、第三四分位數等各項統計         
+```{r}
+x<-rnorm(100,mean=60,sd=12)
+mean(x)
+median(x)
+var(x) 
+sd(x)
+range(x)
+max(x)
+min(x)
+quantile(x)
+```
+
+2.建立上題x的直方圖並加上密度圖       
+```{r}
+hist(x,main = "Histogram of 100 normals",freq=FALSE)     
+lines(density(x))
+```
+
+3.使用summary( )函數以了解前題的向量x的各項總結統計並繪製其箱型圖       
+```{r}
+summary(x)
+boxplot(x,main = "Boxplot of 100 normals")
+```
+
+4.以rchisq(100, df=8)產生100筆自由度為8卡方分配的隨機向量y
+a.求取各項統計     
+```{r}
+y<-rchisq(100, df=8)
+mean(y)
+median(y)
+var(y) 
+sd(y)
+range(y)
+max(y)
+min(y)
+quantile(y)
+```
+
+b.繪製直方圖加密度圖
+```{r}
+hist(y,main = "Histogram of 100 chisq(df=8)",freq=FALSE)     
+lines(density(y))
+```
+
+c.套用summary()函數並繪製箱型圖
+```{r}
+summary(y)
+boxplot(y,main = "Boxplot of 100 chisq(df=8)")
+```
+
+5.檢討上述題目所產生的x與y兩向量間的線性相關係數
+```{r}
+cor(x,y)
+```
+

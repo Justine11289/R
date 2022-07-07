@@ -1,0 +1,586 @@
+---
+title: "wk07_0408_"
+author: "Justine"
+date: "2021/4/8"
+output:
+  html_document:    
+    toc: yes    
+    toc_depth: 3
+    toc_float:    
+      collapsed: no   
+      smooth_scroll: yes  
+---
+# [Home](Home.html)   
+# inclass   
+```{r}
+a <- 2:9
+b <- 1:9
+for(j in a){
+  for(i in b)
+    {
+    cat(j, '*', i, ' =', j*i, '\n')
+  }
+  cat('------------', '\n')
+}
+```
+
+```{r}
+n <- 1:10
+ans <- 0
+for(i in 1:10){
+ans <- ans+i
+}
+print(ans)
+```
+
+```{r}
+#length(state.region)
+regs <- unique(state.region)
+n <- length(regs)
+regs_ctr <- numeric(n)
+names(regs_ctr) <- regs
+for(j in 1:n)
+{
+    for(i in state.region)
+    {
+        if(i==regs[j]){
+          regs_ctr[j]<-regs_ctr[j]+1
+        }
+      }
+    }
+regs_ctr
+```
+
+```{r}
+ch12_10 <- function(x)
+{
+  if (x== 0)
+     x_sum = 1
+  else
+    x_sum = x * ch12_10(x-1)
+  return(x_sum)
+  
+}
+
+ch12_10(11)
+```
+
+```{r}
+for (i in 1:10)
+{
+  for (j in 1:i)
+   cat('*', sep='')
+   cat('\n')
+}
+```
+
+```{r}
+for (i in 1:10)
+{
+  cat(rep('*',i), sep= "", '\n')
+}
+```
+
+```{r}
+cat(rep('*', 5), sep= "")
+```
+
+```{r}
+n <- 31
+star_lines<- seq(1,n,2)
+
+for (i in star_lines)
+{
+  num_space <- (n-i)/2
+  num_star <-  i 
+  str_space <- ""
+  str_star <- ""
+   
+  if (num_space  > 0 )
+  {
+    for (k in 1:num_space) str_space <- cat(str_space, " ", sep='')
+  }
+  for (m in 1:num_star) str_star <-  cat(str_star , "*", sep='')
+ 
+  cat (str_space, str_star, str_space,  sep='', "\n") 
+}
+```
+
+---   
+
+# afterclass    
+## 第十二章是非題      
+1.(O)下列是程式片段A:        
+    if(deg>200){        
+      net.price <- net.price * 1.15       
+    }       
+    下列是程式片段B:           
+    if(deg>200) net.price <- net.price * 1.15          
+    上述2個片段其實是做同樣的工作          
+  
+```{r}
+deg <-100
+if(deg>200){
+    net.price <- net.price * 1.15
+}
+if(deg>200) net.price <- net.price * 1.15
+```
+3.(O)以下是一個電力公司收取電費標準的程式設計,請問以下設計是否對用電量少的小市民較有利?   
+```{r}
+efee <- function(deg, unitPrice = 50)
+{
+  net.price <- deg * unitPrice
+  if( deg > 100 )
+    net.price <- net.price * 1.15
+  else
+    net.price <- net.price * 0.85
+  round(net.price)
+}
+```
+5.(O)設計遞迴式函數,有一個很大的特色是,每次呼叫自己時,都會使問題越來越小       
+
+7.(O)switch敘述無法處理向量資料       
+
+## 第十二章選擇題   
+1.(B)以下何者非R迴圈指令?       
+    (A)for (B)until (C)repeat (D)while        
+    
+3.(B)有程式如下:        
+```{r}
+x <- 5
+y <- if(x < 3){
+  NA
+  }else{
+  5
+}
+print(y)
+```
+    
+    上述執行後,執行結果為何?           
+    (A)[1]NA (B)[1]5 (C)[1]3 (D)[1]10       
+    
+5.(D)執行以下程式碼後:       
+    > a <- 1:5    
+    > b <- 5:1    
+    > d <- ifelse( a < b, a, b)   
+    (A)系統出現error    
+    (B)該程式碼成功執行,d的值為[1,2,3,4,5]  
+    (C)該程式碼成功執行,d的值為[1,2,3,4,5],但系統會出現warning    
+    (D)該程式碼成功執行,d的值為[1,2,3,2,1]    
+
+```{r}
+a <- 1:5
+b <- 5:1
+d <- ifelse( a < b, a, b)
+d
+```
+7.(D)有函數如下:       
+```{r}
+totalprice <- function(deg, unitPrice = 50)
+{
+  net.price <- deg * unitPrice
+  tp <- net.price * if(deg > 100) 1.15 else 0.85
+  round(tp)
+}
+totalprice(200)
+```
+    如果輸入下列指令,結果為何?        
+    > totalprice(200)
+    (A)程式錯 (B)[1]8500 (C)[1]10000 (D)[1]11500     
+    
+9.(B)有指令如下,執行結果為何?           
+     > ifelse( c(100, 1, 50) > 50, 1, 2)    
+
+```{r}
+ifelse( c(100, 1, 50) > 50, 1, 2)    
+```
+    (A)[1]1 1 2 (B)[1]1 2 2 (C)[1]2 2 1 (D)[1]1 1 1       
+
+# 實例    
+11-1    
+```{r}
+x <- c(0.8932, 0.2345, 0.07641, 0.77351) 
+x.percent <- round(x*100, digits = 2)
+x.final <- paste(x.percent, sep = "", "%")
+print(x.final)
+```
+11-2    
+```{r}
+ch11_2 <- function(x)
+{
+  x.percent <- round(x*100, digits = 2)
+  x.final <- paste(x.percent, sep = "", "%")
+  return(x.final)
+}
+new.x <- c(0.8932, 0.2345, 0.07641, 0.77351)
+ch11_2(new.x)
+```
+11-3    
+```{r}
+ch11_3 <- function(x)
+{
+  x.percent <- round(x*100, digits = 2)
+  x.final <- paste(x.percent, sep = "", "%")
+}
+ch11_3(new.x)
+print(ch11_3(new.x))
+```
+11-4    
+```{r}
+ch11_4 <- function(x)
+{
+  x.percent <- round(x*100, digits = 2)
+  paste(x.percent, sep = "", "%")
+}
+ch11_4(new.x)
+```
+11-5    
+```{r}
+ch11_5 <- function(x)
+{
+  if(!is.numeric(x))
+  {
+    print("需傳入值向量")
+    return(NULL)
+  }
+  x.percent <- round(x*100, digits = 2)
+  paste(x.percent, sep = "", "%")
+}
+ch11_5(new.x)
+ch11_5(c("A", "B", "C"))
+```
+11-6    
+```{r}
+ch11_6 <- function(x) x*x
+number.x <- c(9, 11, 5)
+ch11_6(number.x)
+```
+11-7    
+```{r}
+ch11_7 <- function(x) paste(x.percent, sep = "", "%")
+ch11_7(new.x)
+```
+11-8    
+```{r}
+ch11_8 <- function(x, x.digits)
+{
+  x.percent <- round(x*100, digits = x.digits)
+  paste(x.percent, sep = "", "%")
+}
+ch11_8(new.x, 0)
+ch11_8(new.x, x.digits=0)
+ch11_8(new.x, 2)
+ch11_8(new.x, x.digits=2)
+```
+11-9    
+```{r}
+ch11_9 <- function(x, x.digits=1)
+{
+  x.percent <- round(x*100, digits = x.digits)
+  paste(x.percent, sep = "", "%")
+}
+ch11_9(new.x)
+ch11_9(new.x, 1)
+```
+11-10   
+```{r}
+ch11_10 <- function(x, x.digits=0)
+{
+  x.percent <- round(x*100, digits = x.digits)
+  paste(x.percent, sep = "", "%")
+}
+ch11_10(new.x)
+ch11_10(new.x, 2)
+ch11_10(new.x, x.digits=2)
+```
+
+## 第十一章是非題   
+1.(O)在R語言中,也可以將函數想成是一個物件,在RStudio視窗的Console視窗直接輸入函數名稱,可以看到函數的程式碼   
+3.(O)函數主體是由大括號("{"和"}")括起來,其實,如果函數主體只有1列,也可以省略大括號            
+5.(X)函數是無法作為另一格函數的參數           
+7.(O)其實對於一個函數而言,這個函數內部所使用的變數稱區域變數(local variable)       
+
+## 第十一章選擇題   
+1.(B)下列函數，如果不傳遞第2個參數設定產生到小數第幾位的百分比，將自
+動產生第幾位小數的百分比        
+```{r}
+e.percent <- function(x,x.digits = 1)
+{
+  x.percent <- round(x *100, digits = x.digits)
+  paste(x.percent, sep = "","%")
+}
+```
+(A)0 (B)1 (C)2 (D)3       
+
+3.(D)有函數如下：        
+```{r}
+e2.percent <- function(x, ...)
+{
+  x.percent <- round(x *100, ...)
+  paste(x.percent, sep = "","%")
+}
+e2.percent(0.03456)
+e2.percent(0.03456, 2)
+e2.percent(0.03456, digits = 2)
+#e2.percent(0.03456, xdigits = 2)
+```
+    下列那一個函數呼叫會有錯誤訊息?        
+    (A)> e2.percent(0.03456)          
+    (B)> e2.percent(0.03456, 2)       
+    (C)> e2.percent(0.03456, digits = 2)          
+    (D)> e2.percent(0.03456, xdigits = 2)       
+5.(A)有函數如下：       
+```{r}
+percent <- function(x, ...)
+{
+  UseMethod("percent")
+}
+percent.numeric <- function(x, Xfun = round, ...)
+{
+  x.percent <- Xfun(x *100, ...)
+  paste(x.percent, sep = "","%")
+}
+percent.charcter <- function(x)
+{
+  paste(x, sep = "","%")
+}
+percent.default <- function(x)
+{
+  print("本程式目前只能處理數值和字元向量")
+}
+```
+    上述函數那一個是通用函數（Generic Function）?       
+    (A) percent( )           (B) percent.numeric( )       
+    (C) percent.character( ) (D) percent.default( )       
+7.(B)有函數如下：
+```{r}
+percent <- function(x, ...)
+{
+  UseMethod("percent")
+}
+percent.numeric <- function(x, Xfun = round, ...)
+{
+  x.percent <- Xfun(x *100, ...)
+  paste(x.percent, sep = "","%")
+}
+percent.charcter <- function(x)
+{
+  paste(x, sep = "","%")
+}
+percent.default <- function(x)
+{
+  print("本程式目前只能處理數值和字元向量")
+}
+```
+    如果呼叫上述的通用函數時，所傳遞的資料是數值資料，實際上將呼叫那一個函數執行真正的工作?
+    (A) percent( )           (B) percent.numeric( )       
+    (C) percent.character( ) (D) percent.default( )       
+    
+---   
+
+# selfpractice    
+## 第十二章是非題   
+2.(X)有一個流程控制片段如下:    
+    if(邏輯運算式){       
+    系列運算指令A   
+    }else{            
+    系列運算指令B
+    }         
+    如果邏輯運算式是FALSE,則會執行系列運算指令A   
+    
+4.(X)以下是一個電力公司收取電費標準的程式設計,請問以下設計是否對用電量大的市民較有利?   
+```{r}
+efee <- function(deg, unitPrice = 50)
+{
+  net.price <- deg * unitPrice
+  adjustment <- if( deg > 100 ) 1.15 else 0.85
+  total.price <- net.price * adjustment
+  round(total.price)
+}
+```   
+
+6.(X)ifelse()函數最大的缺點是無法處理向量資料   
+
+8.(X)有一指令如下:    
+    > ifelse(x >= 1, 2, 3)    
+    以上R指令若x=1,則結果為3    
+    
+## 第十二章選擇題   
+2.(B)以下R指令何者結果必定為3?        
+    (A)ifelse(x>=3,2,3) (B)ifelse(2>=3,2,3)         
+    (C)ifelse(3>=3,2,3) (D)ifelse(y>=3,2,3)         
+
+4.(C)執行以下程式碼後:       
+    > a <- 1:5    
+    > b <- 5:1    
+    > d <- if(a < b) a else b        
+    (A)系統出現error    
+    (B)該程式碼成功執行,d的值為[1,2,3,4,5]  
+    (C)該程式碼成功執行,d的值為[1,2,3,4,5],但系統會出現warning    
+    (D)該程式碼成功執行,d的值為[1,2,3,2,1]    
+
+```{r}
+a <- 1:5
+b <- 5:1
+d <- if(a < b) a else b
+d
+```
+6.(B)有程式指令內容如下:       
+    > a <- c(0.9, 0.5, 0.7, 1.1)    
+    > b <- c(1.2, 1.2, 0.6, 1.0)    
+    c為a,b兩個向量當中較大的元素構成:   
+    > c   
+    [1] 1.2 1.2 0.7 1.1   
+    以下哪條命令可以用來生成c?    
+    (A)c <- if(a < b) a else b      (B)c <- pmax(a, b)    
+    (C)if(a < b) c <- a else c <- b (D)c <- max(a, b)   
+    
+```{r}
+a <- c(0.9, 0.5, 0.7, 1.1)    
+b <- c(1.2, 1.2, 0.6, 1.0)
+c <- if(a < b) a else b
+c
+```
+```{r}
+a <- c(0.9, 0.5, 0.7, 1.1)    
+b <- c(1.2, 1.2, 0.6, 1.0)
+c <- pmax(a, b)
+c
+```
+```{r}
+a <- c(0.9, 0.5, 0.7, 1.1)    
+b <- c(1.2, 1.2, 0.6, 1.0)
+if(a < b) c <- a else c <- b 
+c
+```
+```{r}
+a <- c(0.9, 0.5, 0.7, 1.1)    
+b <- c(1.2, 1.2, 0.6, 1.0)
+c <- max(a, b)
+c
+```
+8.(D)有函數如下:       
+```{r}
+ex <- function(x)
+{
+  if(x == 0)
+    x_sum = 1
+  else
+    x_sum = x * ex(x - 1)
+    return(x_sum)
+}
+ex(5)
+```
+    如果輸入下列指令,結果為何?        
+    > ex(5)       
+    (A)程式錯 (B)[1]6 (C)[1]24 (D)[1]120    
+    
+## 第十二章複選題   
+1.(ABC)有函數如下:       
+```{r}
+ex <- function(deg, unitPrice = 50)
+{
+ np <- deg * unitPrice
+ np = np * ifelse((deg > 100), 1.1, 0.9)
+ round(np)
+}
+ex(50)
+ex(100)
+ex(200)
+ex(300)
+ex(60)
+```
+    下列哪些是正確的執行結果?       
+    (A)> ex(50) (B)> ex(100) (C)> ex(200) (D)> ex(300) (E)> ex(60)        
+       [1]2250     [1]4500      [1]11000     [1]18000     [1]2400       
+       
+## 第十一章是非題 
+2.(X)在R語言中，也可以將函數想成是一個物件，在RStudio 視窗的Console       
+    視窗直接輸入直接輸入函數名稱，可以執行此函數，例如，你設計了一個        
+    函數"convert( )"，可以使用下列方式執行此函數    
+    >convert  
+    
+4.(O)在函數呼叫的設計中，R語言提供了3點參數"..."的概念，這種3點參數通常會放在函數參數列表的最後面
+6.(O)有一個函數碼如下：
+```{r}
+exer1 <- function(x,Xfun = round, ...)
+{
+  x.percent <- Xfun(x * 100, ...)
+  paste(x.percent, sep = "", "%")
+}
+```
+    呼叫上述函數時，如果沒有傳遞第2 個參數，此函數將自動執行round( )函數
+8.(O)如果一個函數接收到參數後，什麼事都不做，只是將工作分配其他函數執
+行，這類函數稱通用函數(Generic Function)        
+
+## 第十一章選擇題       
+2.(A)下列函數，如果不傳遞第2個參數設定產生到小數第幾位的百分比，將自動產生第幾位小數的百分比?       
+```{r}
+e2.percent <- function(x, ...)
+{
+  x.percent <- round(x *100, ...)
+  paste(x.percent, sep = "","%")
+}
+```
+  (A)0 (B)1 (C)2 (D)3     
+  
+4.(B)下列哪一個函數是print( )函數的預設函數?
+    (A) print.list( )      (B) print.default( )       
+    (C) print.condition( ) (D) print.restart( )    
+    
+6.(D)有函數如下：
+```{r}
+percent <- function(x, ...)
+{
+  UseMethod("percent")
+}
+percent.numeric <- function(x, Xfun = round, ...)
+{
+  x.percent <- Xfun(x *100, ...)
+  paste(x.percent, sep = "","%")
+}
+percent.charcter <- function(x)
+{
+  paste(x, sep = "","%")
+}
+percent.default <- function(x)
+{
+  print("本程式目前只能處理數值和字元向量")
+}
+```
+    如果呼叫上述的通用函數時，所傳遞的資料是數據框（data frame），實際上將呼叫那一個函數執行真正的工作?
+    (A) percent( )           (B) percent.numeric( )       
+    (C) percent.character( ) (D) percent.default( )       
+
+## 第十一章複選題       
+1.(CD)下列哪些函數是通用函數（Generic Function）?       
+    (A) sum( )  (B) as.Date( )
+    (C) plot( ) (D) print( )   (E) grep( )
+
+
+# for迴圈練習      
+```{r}
+for(i in 1:10){
+  for(j in 1:i+1){
+    cat('*')
+  }
+cat('\n')
+}
+```
+
+```{r}
+for(i in 1:10){
+  for(j in 10:i-1){
+    cat(' ')
+  }
+  for(k in 1:i+1){
+    cat('* ')
+  }
+cat('\n')
+}
+```
+  
+
+---   
+# 上課筆記    
+unique()標示出現的資料    

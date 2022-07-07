@@ -1,0 +1,366 @@
+---
+title: "Ch19Practice"
+author: "Justine"
+date: "2021/7/3"
+output:
+  html_document:    
+    toc: yes    
+    toc_depth: 3
+    toc_float:    
+      collapsed: no   
+      smooth_scroll: yes  
+---
+# [Home](Home.html)   
+
+### 是非題        
+1.(O)R語言內建了許多的繪圖工具函數以供參考使用，我們可以先使用demo(graphics)或者demo(image)兩個指令來參考R所提供的繪圖示範       
+2.(O)低階繪圖(Low-level Plotting Functions)是用在一個已經繪製好的圖形上加上其他的圖形元素，例如加上說明文字、直線或點等等        
+3.(X)低階繪圖(Low-level Plotting Functions)是用在建立一個新的圖形，常用的各種統計繪圖，基本上都是屬於低階繪圖        
+4.(X)互動式繪圖(Interactive Graphics Functions)：允許使用者以互動的方式使用其他的設備，例如滑鼠，
+    在一個已經存在的圖形上加入繪圖相關資訊，例如：points()以及text()兩函數都是屬於互動式繪圖        
+5.(O)我們可以使用dev.new()函數來打開一個新的繪圖設備；而使用dev.off(x)來關閉指定的繪圖設備        
+6.(X)我們可以使用graphics.off()來關閉某一個指定的繪圖設備       
+7.(X)mfrow參數設置不需要透過par()來設置，是可以作為高階或者低階繪圖中函數參數的設置使用        
+8.(X)我們可以使用square()低階繪圖函數來繪製四邊形        
+9.(O)abline()低階繪圖函數可以用來繪製水平或者垂直線條於指定座標處        
+10.(O)curve()以及coplot()兩函數均是屬於高階繪圖函數        
+
+---   
+
+### 選擇題        
+1.(D)以下哪個函數可以用來來關閉某一個指定的繪圖設備?        
+    (A)dev.quit()     (B)dev.down()       
+    (C)graphics.off() (D)dev.off()        
+2.(A)以下哪個函數是屬於互動式繪圖(Interactive Graphics Functions)?        
+    (A)identify() (B)text() (C)plot() (D)pairs()        
+3.(B)以下哪個函數是屬於低階繪圖(Low-level Plotting Functions)?        
+    (A)identify() (B)text() (C)plot() (D)pairs()     
+4.(A)以下哪個函數不屬於高階繪圖(High-level Plotting Functions)?   
+    (A)identify() (B)hist() (C)plot() (D)pairs()
+5.(A)以下的繪圖結果是由哪一組指令所獲得的?       
+(A)
+```{r}
+par(fig=c(0.5,1,0,0.5))
+plot(1:2,main="Result")
+```
+(B)
+```{r}
+plot(1:2,main="Result")
+```
+(C)
+```{r}
+par(mai=c(0.5,1,0,0.5))
+plot(1:2,main="Result")
+```
+(D)
+```{r}
+par(mfrow=c(1,2))
+plot(1:2,main="Result")
+```
+
+6.(A)如果我們要以下列R的群組程式產生如下兩個繪圖的佈局，矩陣x應該事先被定義為何?        
+    > nf <- layout(x,widths=c(1,1),+heights = c(1,1),respect=TRUE)
+    > layout.show(nf)
+    
+(A)
+```{r}
+x <- matrix(c(1,1,0,2),2,2,byrow = TRUE)
+nf <- layout(x,widths = c(1,1),heights = c(1,1),respect=TRUE)
+layout.show(nf)
+```
+(B)
+```{r}
+x <- matrix(c(1,1,2,2),2,2,byrow = TRUE)
+nf <- layout(x,widths = c(1,1),heights = c(1,1),respect=TRUE)
+layout.show(nf)
+```
+(C)
+```{r}
+x <- matrix(c(1,0,2,0),2,2,byrow = TRUE)
+nf <- layout(x,widths = c(1,1),heights = c(1,1),respect=TRUE)
+layout.show(nf)
+```
+(D)
+```{r}
+x <- matrix(c(1,2,1,2),2,2,byrow = TRUE)
+nf <- layout(x,widths = c(1,1),heights = c(1,1),respect=TRUE)
+layout.show(nf)
+```
+
+7.(A)如果我們要使用plot()函數產生如下垂直軸經過log()函數轉換的繪圖，正確R指令會是哪一個?        
+(A)
+```{r}
+plot(x=1:10,y=exp(1:10),log="y",main="log transformation of y")
+```
+(B)
+```{r}
+plot(x=1:10,y=exp(1:10),log="x",main="log transformation of y")
+```
+(C)
+```{r}
+plot(x=1:10,y=exp(1:10),main="log transformation of y")
+```
+(D)
+```{r}
+plot(x=1:10,y=exp(1:10),ylog=TRUE,main="log transformation of y")
+```
+
+8.(D)以下哪個函數不是R繪製3D圖形函數?        
+    (A)persp() (B)contour() (C)image() (D)3Dplot()        
+9.(C)低階繪圖arrow()函數的參數code設定為何者時可以在兩個端點都繪製箭頭?       
+    (A)1 (B)2 (C)3 (D)4       
+10.(A)低階繪圖polygon()函數使用何種參數來設定每ㄧ英吋內陰影的線條數?        
+    (A)density (B)lty (C)col (D)lines       
+11.(D)以下哪個函數可以用來產生Normal Distribution的隨機數?       
+    (A)dnorm() (B)pnrom() (C)qnorm() (D)rnorm()       
+13.(D)何組R指令會產生以下圖型?       
+(A)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+line(1:10)
+```
+(B)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+line(x,y)
+```
+(C)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+#line(lm(y~x))
+```
+(D)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+abline(lm(y~x))
+```
+
+14.(A)何組R指令會產生以下圖型?       
+(A)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+grid(nx=4,ny=4,col = "red")
+```
+(B)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+#lines(nx=4,ny=4,col = "red")
+```
+(C)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+#points(nx=4,ny=4,col = "red")
+```
+(D)
+```{r}
+x=1:10
+y=c(2,7,3,5,9,8,7,6,1,7)
+plot(x,y)
+#grids(nx=4,ny=4,col = "red")
+```
+
+15.(C)何組R指令會產生以下圖型?       
+(A)
+```{r}
+boxplot(y)
+title(main = "boxplot",xlab = "xlab",ylab = "ylab")
+```
+(B)
+```{r}
+boxplot(y)
+title(main = "boxplot",x_lab = "xlab",y_lab = "ylab")
+points(mean(y),col="red")
+```
+(C)
+```{r}
+boxplot(y)
+title(main = "boxplot",xlab = "xlab",ylab = "ylab")
+points(mean(y),col="red")
+```
+(D)
+```{r}
+boxplot(y)
+title(main = "boxplot",x_lab = "xlab",y_lab = "ylab")
+```
+
+16.(D)以下R指令執行後的最後結果為何?       
+```{r}
+boxplot(y)
+title(main = "boxplot",x_lab = "xlab",y_lab = "ylab")
+points(mean(y),col="red")
+```
+
+17.(A)欲將箱型圖圖檔輸出成pdf格式的R指令為何?        
+    (A)pdf("e:/aaa.pdf")        
+       boxplot(x)       
+       dev.off( )       
+    (B)boxplot(x)                   
+       pdf("e:/aaa.pdf")                   
+       dev.off( )           
+    (C)plot(x)        
+       pdf("e:/aaa.pdf")        
+       dev.off()        
+    (D)box(x)       
+       pdf("e:/aaa.pdf")        
+       dev.off( )       
+       
+18.(D)以下圖型R指令可能為?       
+(A)
+```{r}
+plot(x)
+#texts(2,5,"test text")
+```
+(B)
+```{r}
+plot(x)
+#point(2,5,"test text")
+```
+(C)
+```{r}
+#text(2,5,"test text")
+plot(x)
+```
+(D)
+```{r}
+plot(x)
+text(2,5,"test text")
+```
+
+19.(A)以下圖型R指令可能為?       
+(A)
+```{r}
+plot(x,pch=4)
+```
+(B)
+```{r}
+plot(x,col=4)
+```
+(C)
+```{r}
+plot(x,cel=4)
+```
+(D)
+```{r}
+#plot(x,lab=4)
+```
+
+20.(C)以下圖型R指令可能為?       
+(A)
+```{r}
+plot(x)
+lines(x,lty=10)
+```
+(B)
+```{r}
+plot(x)
+points(x,lwd=10)
+```
+(C)
+```{r}
+plot(x)
+lines(x,lwd=10)
+```
+(D)
+```{r}
+plot(x)
+```
+
+21.(A)以下R指令結果為?        
+```{r}
+x <- 1:10
+plot(x)
+lines(x,lwd=10)
+```
+
+---   
+1.(ABC)以下哪些函數是R繪製3D圖形函數?       
+    (A)persp() (B)contour() (C)image() (D)hist() (E)curve()       
+2.(ABC)以下abline()低階繪圖函數哪些參數設定是正確的?              
+    (A)coef=c(1, 2) (B)a=3, b=2       
+    (C)h=4          (D)slope=3, intercept=2  (E)s=2, i=3        
+3.(ABC)以下哪些是屬於低階繪圖函數?           
+    (A)abline() (B)legend() (C)axis() (D)curve() (E)persp( )        
+4.(ACD)以下哪些是屬於高階繪圖函數?               
+    (A)barplot() (B)legend() (C)coplot() (D)curve() (E)persp()        
+5.(ABC)以下哪些是屬於低階繪圖函數?        
+    (A)segment() (B)title() (C)points() (D)image() (E)contour()       
+6.(ACD)以下R指令何者有錯?       
+(A)
+```{r}
+#text(2, 5, "test text")
+plot(x)
+```
+(B) 
+```{r}
+plot(x)
+lines(x, lty = 10)
+```
+(C) 
+```{r}
+plot(x)
+#texts(2, 5, "test text")
+```
+(D) 
+```{r}
+plot(x)
+#line(2,5,"test text")
+```
+(E) 
+```{r}
+plot(x)
+text(2, 5,"test text")
+```
+
+7.(ADE)以下R指令何者有錯?    
+    (A)doc("e:/aaa.doc ")       
+       boxplot(x)       
+       dev.off( )       
+    (B)bmp("e:/aaa.bmp ")           
+       boxplot(x)       
+       dev.off( )       
+    (C)pdf("e:/aaa.pdf ")       
+       boxplot(x)       
+       dev.off( )       
+    (D)box(x)       
+    (E)bmp("e:/aaa.bmp")        
+       boxplots(x)        
+       dev.off( )       
+
+8.(AB)以下哪些R指令結果相同?       
+(A) 
+```{r}
+plot(x, pch = 2)
+```
+(B)
+```{r}
+plot(x, type = "n")
+points(x, pch = 2)
+```
+(C)
+```{r}
+plot(x, type = "n")
+points(x, pch = 2)
+```
+(D)
+```{r}
+plot(x,type="n")
+#point(x, pch=2)
+```
+(E)
+```{r}
+#plot(x, type = 2)
+```

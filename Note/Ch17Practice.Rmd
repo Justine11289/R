@@ -1,0 +1,84 @@
+---
+title: "Ch17Practice"
+author: "Justine"
+date: "2021/7/3"
+output:
+  html_document:    
+    toc: yes    
+    toc_depth: 3
+    toc_float:    
+      collapsed: no   
+      smooth_scroll: yes  
+---
+# [Home](Home.html)   
+
+```{r}
+library(lattice)
+```
+
+### 是非題        
+1.(O)我們可以用histogram()函數將數據導入，直接瞭解數據的分佈作推斷        
+    由於這個函數是在擴展包lattice內，所以使用前先以library(lattice)載入       
+2.(X)histogram()函數已經在R的基本設定中，因此不需要下載任何擴充包，可以直接執行，不會有任何錯誤訊息       
+3.(O)shapiro.test()函數已經在R的基本設定中，因此不需要下載任何擴充包，可以直接執行檢測，不會有任何錯誤訊息      
+4.(O)我們想要了解數據框x中的數值變數y在不同的因子變數sex下分開檢驗其y數據，瞭解是否符合常態分配。我們已經下載了相關的擴充包後，可以使用以下指令來完成檢測        
+    > histogram(~y|sex,data=x)    
+7.(X)我們使用了shapiro.test(x)函數對數值變數x進行檢測，結果x$p.value的數值為0.12，表示有強烈證據顯示x符合了常態分配        
+
+---       
+
+### 選擇題        
+1.(A)以下何種函數在使用前必須下載擴充包才能夠順利執行，不會產生錯誤訊息?       
+    (A)histogram() (B)shapiro.test()        
+    (C)qqnorm()    (D)qqline()        
+2.(A)我們想要了解數據框x中的數值變數y在不同的因子變數sex下分開檢驗其y數據，瞭解是否符合常態分配                
+    我們已經下載了相關的擴充包後，可以使用以下histogram()指令來正確完成檢測       
+    (A)> histogram(~y|sex,data=x)       
+    (B)> histogram(y|sex,data=x)        
+    (C)> histogram(x$y|sex)           
+    (D)> histogram(~y|sex)            
+5.(C)我們使用了shapiro.test(x)函數對數值變數x進行檢測       
+    以下哪一個x$p.value數值結果，表示有強烈證據顯示拒絕了x符合常態分配?        
+    (A)0.12 (B)0.58 (C)0.001 (D)0.95        
+6.(D)我們使用了shapiro.test()分別對nortest2$F與nortest2$M進行了檢測得到如下的結果:       
+    > nortest2$F$p.value    
+    [1] 0.5256088   
+    > nortest2$M$p.value    
+    [1] 0.0068288   
+    
+    以下的結論哪一個最正確？        
+    (A)nortest2$F與nortest2$M均符合常態分配       
+    (B)nortest2$F與nortest2$M均不符合常態分配       
+    (C)nortest2$F不符合常態分配而nortest2$M符合常態分配        
+    (D)nortest2$F符合常態分配而nortest2$M不符合常態分配        
+    
+---       
+
+### 複選題                
+1.(ABC)以下何種函數可以將數據導入，不需要下載擴充包，直接瞭解數據的分佈作推斷?       
+    (A)hist()         (B)qqnorm()       
+    (C)shapiro.test() (D)dotplot()    (E)histogram()        
+2.(ABC)以下何種函數可以用來檢測數值數據是否為常態分配?       
+    (A)histogram()    (B)qqnorm()       
+    (C)shapiro.test() (D)boxplot()    (E) dotchart()   
+    
+---   
+
+### 實作題    
+1.使用histogram()函數繪製crabs數據框的FL變數的直方圖；並使用sex因子變數作為條件變數再繪製條狀直方圖        
+```{r}
+#install.packages(MASS)
+library(MASS)
+histogram(~FL|sex,data = crabs)
+```
+
+2.使用qqnorm()與qqline()函數繪製crabs數據框的FL變數的QQ圖
+```{r}
+qqnorm(crabs$FL,main = "QQ for Crabs")
+qqline(crabs$FL)
+```
+  再使用shapiro.test()檢測crabs$FL變數是否符合常態分配       
+```{r}
+nortest <- shapiro.test(crabs$FL)
+nortest$p.value
+```
